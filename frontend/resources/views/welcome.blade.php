@@ -28,7 +28,7 @@
         html { scroll-behavior: smooth; }
 
         /* ══════════════════════════════════════
-           BACKGROUND — dijamin keliatan
+           BACKGROUND
         ══════════════════════════════════════ */
         body {
             font-family: 'DM Sans', sans-serif;
