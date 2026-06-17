@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Database\QueryException;
 use Kreait\Firebase\Contract\Auth as FirebaseAuth;
+use Kreait\Firebase\Exception\Auth\AuthError;
 use Kreait\Firebase\Exception\Auth\InvalidPassword;
 use Kreait\Firebase\Exception\Auth\UserNotFound;
+use Kreait\Firebase\Auth\SignIn\FailedToSignIn;
 
 class LoginController extends Controller
 {
@@ -46,7 +50,7 @@ class LoginController extends Controller
 
         try {
             // 2. Verifikasi kredensial ke Firebase Authentication
-            $signInResult = $this->firebaseAuth->signInWithEmailAndPassword(
+            $this->firebaseAuth->signInWithEmailAndPassword(
                 $request->email,
                 $request->password
             );
@@ -60,7 +64,7 @@ class LoginController extends Controller
                 /**
                  * 4. Login ke Session Laravel
                  */
-                \Illuminate\Support\Facades\Auth::login($user);
+                Auth::login($user);
                 $request->session()->regenerate();
 
                 // 5. Redirect berdasarkan Role
@@ -76,18 +80,59 @@ class LoginController extends Controller
                 'email' => 'Akun terverifikasi di Firebase, namun data peran (role) tidak ditemukan di database lokal.',
             ]);
 
-        } catch (UserNotFound $e) {
+        } catch (UserNotFound) {
             return back()->withErrors([
                 'email' => 'Email atau kata sandi yang Anda masukkan salah.',
             ]);
-        } catch (InvalidPassword $e) {
+        } catch (InvalidPassword) {
             return back()->withErrors([
                 'email' => 'Email atau kata sandi yang Anda masukkan salah.',
             ]);
+        } catch (FailedToSignIn $e) {
+            Log::warning('Firebase admin login failed.', [
+                'email' => $request->email,
+                'message' => $e->getMessage(),
+            ]);
+
+            return back()->withErrors([
+                'email' => 'Email atau kata sandi yang Anda masukkan salah.',
+            ])->onlyInput('email');
+        } catch (AuthError $e) {
+            Log::error('Firebase admin login configuration error.', [
+                'email' => $request->email,
+                'message' => $e->getMessage(),
+                'previous' => $e->getPrevious()?->getMessage(),
+            ]);
+
+            $message = strtolower($e->getMessage() . ' ' . ($e->getPrevious()?->getMessage() ?? ''));
+
+            if (str_contains($message, 'invalid_grant') || str_contains($message, 'invalid jwt signature')) {
+                return back()->withErrors([
+                    'email' => 'Credential Firebase tidak valid. Buat service account JSON baru di Firebase Console lalu ganti file credential pada FIREBASE_CREDENTIALS.',
+                ])->onlyInput('email');
+            }
+
+            return back()->withErrors([
+                'email' => 'Konfigurasi Firebase bermasalah. Periksa file service account JSON.',
+            ])->onlyInput('email');
+        } catch (QueryException $e) {
+            Log::error('Database error during admin login.', [
+                'email' => $request->email,
+                'message' => $e->getMessage(),
+            ]);
+
+            return back()->withErrors([
+                'email' => 'Database belum siap. Pastikan MySQL berjalan dan migrasi sudah dijalankan.',
+            ])->onlyInput('email');
         } catch (\Exception $e) {
+            Log::error('Unexpected admin login error.', [
+                'email' => $request->email,
+                'message' => $e->getMessage(),
+            ]);
+
             return back()->withErrors([
                 'email' => 'Gagal terhubung ke server, silakan coba beberapa saat lagi.',
-            ]);
+            ])->onlyInput('email');
         }
     }
 
@@ -96,7 +141,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        \Illuminate\Support\Facades\Auth::logout();
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
