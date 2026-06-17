@@ -5,6 +5,7 @@
 .env.production
 *firebase-adminsdk*.json
 firebase-service-account*.json
+/app/Http/Controllers/Auth/login-dass-21-*.json
 .phpactor.json
 .phpunit.result.cache
 /.codex
