@@ -1,11 +1,15 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+import os
+from pathlib import Path
 
 app = Flask(__name__)
 
 # Load model
-model = joblib.load('models/model_knn.pkl')
+BASE_DIR = Path(__file__).resolve().parent
+model_path = os.getenv('KNN_MODEL_PATH', str(BASE_DIR / 'models' / 'model_knn.pkl'))
+model = joblib.load(model_path)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -45,4 +49,6 @@ def predict():
     })
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5001, debug=True)
+    port = int(os.getenv('PORT', '5001'))
+    debug = os.getenv('FLASK_DEBUG', 'false').lower() == 'true'
+    app.run(host='0.0.0.0', port=port, debug=debug)

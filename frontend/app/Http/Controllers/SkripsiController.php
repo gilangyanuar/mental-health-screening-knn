@@ -137,7 +137,7 @@ class SkripsiController extends Controller
         try {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post('http://127.0.0.1:5001/predict', [
+            ])->post(config('services.knn.url'), [
                 'q1'  => (int) $request->q1,  'q2'  => (int) $request->q2,
                 'q3'  => (int) $request->q3,  'q4'  => (int) $request->q4,
                 'q5'  => (int) $request->q5,  'q6'  => (int) $request->q6,

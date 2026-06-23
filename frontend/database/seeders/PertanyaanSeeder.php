@@ -36,14 +36,28 @@ class PertanyaanSeeder extends Seeder
         ];
 
         foreach ($data as $i => $p) {
-            DB::table('pertanyaan')->insert([
-                'id_pertanyaan'   => $i + 1,
-                'kode_pertanyaan' => $p['kode'],
-                'teks_pertanyaan' => $p['teks'],
-                'kategori'        => $p['kategori'],
-                'created_at'      => now(),
-                'updated_at'      => now(),
-            ]);
+            $existing = DB::table('pertanyaan')
+                ->where('kode_pertanyaan', $p['kode'])
+                ->exists();
+
+            if ($existing) {
+                DB::table('pertanyaan')
+                    ->where('kode_pertanyaan', $p['kode'])
+                    ->update([
+                        'teks_pertanyaan' => $p['teks'],
+                        'kategori'        => $p['kategori'],
+                        'updated_at'      => now(),
+                    ]);
+            } else {
+                DB::table('pertanyaan')->insert([
+                    'id_pertanyaan'   => $i + 1,
+                    'kode_pertanyaan' => $p['kode'],
+                    'teks_pertanyaan' => $p['teks'],
+                    'kategori'        => $p['kategori'],
+                    'created_at'      => now(),
+                    'updated_at'      => now(),
+                ]);
+            }
         }
     }
 }

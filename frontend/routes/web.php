@@ -4,14 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\Auth\LoginController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
 // ================= FORM RESPONDEN =================
-Route::get('/assessment/form', function () {
-    return view('assessment.form');
-})->name('assessment.form');
+Route::view('/assessment/form', 'assessment.form')->name('assessment.form');
 
 // ================= SIMPAN PROFILE & TAMPIL ASSESSMENT =================
 // FIX: method POST untuk terima data profile dari form
