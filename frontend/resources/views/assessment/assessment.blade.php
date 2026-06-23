@@ -18,7 +18,7 @@
 
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
@@ -61,7 +61,7 @@
         body{
 
             background:var(--bg);
-            font-family:'DM Sans',sans-serif;
+            font-family:'Poppins',sans-serif;
             color:var(--text-dark);
             min-height:100vh;
             -webkit-font-smoothing:antialiased;
@@ -231,7 +231,7 @@
 
         .left-title{
 
-            font-family:'DM Serif Display',serif;
+            font-family:'Poppins',sans-serif;
             font-size:2rem;
 
             color:white;
@@ -567,7 +567,7 @@
 
         .question-text{
 
-            font-family:'DM Serif Display',serif;
+            font-family:'Poppins',sans-serif;
 
             font-size:1.65rem;
 

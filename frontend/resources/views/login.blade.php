@@ -6,7 +6,7 @@
     <title>Login Admin | DASS-21</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
@@ -31,7 +31,7 @@
 
         body {
             background: var(--bg);
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
@@ -129,7 +129,7 @@
         }
 
         .left-title {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 2.2rem;
             color: white;
             line-height: 1.2;
@@ -239,7 +239,7 @@
         }
 
         .form-header h1 {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 2rem;
             color: var(--text-dark);
             margin-bottom: .4rem;
@@ -330,7 +330,7 @@
             border: 1.5px solid #dce5ff;
             padding: .7rem 1rem .7rem 2.8rem;
             font-size: .92rem;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
             background: var(--white);
             transition: border-color .2s, box-shadow .2s;
@@ -385,7 +385,7 @@
             padding: 1rem;
             font-weight: 700;
             font-size: 1rem;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;

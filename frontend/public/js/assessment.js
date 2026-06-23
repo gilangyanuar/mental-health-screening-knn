@@ -134,7 +134,7 @@ function renderNextButton() {
         border:none;border-radius:var(--radius-sm);
         padding:.75rem 1.6rem;
         font-size:.9rem;font-weight:700;
-        font-family:'DM Sans',sans-serif;
+        font-family:'Poppins',sans-serif;
         cursor:pointer;
         transition:background .2s,transform .2s,opacity .2s;
     `;

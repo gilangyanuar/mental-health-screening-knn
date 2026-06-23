@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasil Assessment | DASS-21</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
@@ -20,7 +20,7 @@
         *{box-sizing:border-box;margin:0;padding:0;}
         html{scroll-behavior:smooth;}
         body{
-            font-family:'DM Sans',sans-serif;color:var(--text-1);
+            font-family:'Poppins',sans-serif;color:var(--text-1);
             -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;
             background:linear-gradient(135deg,#eef1fb 0%,#e8eeff 50%,#f0f6ff 100%);
         }
@@ -63,7 +63,7 @@
 
         /* KONDISI + BADGE */
         .kondisi-wrap{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem;}
-        .kondisi-name{font-family:'DM Serif Display',serif;font-size:3rem;line-height:1;font-weight:400;}
+        .kondisi-name{font-family:'Poppins',sans-serif;font-size:3rem;line-height:1;font-weight:400;}
         .kondisi-name.normal  {color:var(--green);}
         .kondisi-name.stres   {color:var(--amber);}
         .kondisi-name.cemas   {color:var(--blue);}
@@ -122,7 +122,7 @@
         .score-card.cemas   .score-icon{background:var(--blue-light);color:var(--blue);}
         .score-card.depresi .score-icon{background:#fee2e2;color:var(--red);}
         .score-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text-3);margin-bottom:.3rem;}
-        .score-number{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1;margin-bottom:.8rem;}
+        .score-number{font-family:'Poppins',sans-serif;font-size:2.8rem;line-height:1;margin-bottom:.8rem;}
         .score-card.stres   .score-number{color:#d97706;}
         .score-card.cemas   .score-number{color:var(--blue);}
         .score-card.depresi .score-number{color:var(--red);}
@@ -144,7 +144,7 @@
 
         /* SECTION */
         .sec-label{display:inline-block;background:rgba(27,58,254,.1);color:var(--blue);font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.35rem .85rem;border-radius:30px;margin-bottom:.75rem;border:1px solid rgba(27,58,254,.12);}
-        .sec-title{font-family:'DM Serif Display',serif;font-size:1.55rem;color:var(--text-1);margin-bottom:1.3rem;line-height:1.25;}
+        .sec-title{font-family:'Poppins',sans-serif;font-size:1.55rem;color:var(--text-1);margin-bottom:1.3rem;line-height:1.25;}
         .card-wrap{border-radius:var(--r-xl);padding:2.5rem;box-shadow:var(--shadow-sm);margin-bottom:1.5rem;position:relative;overflow:hidden;}
         @media(max-width:768px){.card-wrap{padding:1.8rem;}}
 
@@ -162,8 +162,8 @@
         .cta-banner::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.06);top:-120px;right:-70px;}
         .cta-banner::after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04);bottom:-70px;left:-55px;}
         .cta-inner{position:relative;z-index:1;}
-        .cta-quote-mark{font-family:'DM Serif Display',serif;font-size:4.5rem;color:rgba(255,255,255,.14);line-height:.5;margin-bottom:1rem;}
-        .cta-quote{font-family:'DM Serif Display',serif;font-size:1.45rem;line-height:1.5;margin-bottom:.9rem;}
+        .cta-quote-mark{font-family:'Poppins',sans-serif;font-size:4.5rem;color:rgba(255,255,255,.14);line-height:.5;margin-bottom:1rem;}
+        .cta-quote{font-family:'Poppins',sans-serif;font-size:1.45rem;line-height:1.5;margin-bottom:.9rem;}
         .cta-sub{color:rgba(255,255,255,.72);font-size:.88rem;line-height:1.8;}
         @media(max-width:768px){.cta-banner{padding:2rem;}.cta-quote{font-size:1.2rem;}}
 

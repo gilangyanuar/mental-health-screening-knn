@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DASS-21 — Assessment Kesehatan Mental Mahasiswa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
@@ -31,7 +31,7 @@
            BACKGROUND
         ══════════════════════════════════════ */
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--text-1);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
@@ -156,7 +156,7 @@
             background: var(--blue-mid); border-radius: 2px; flex-shrink: 0;
         }
         .hero-title {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 2.9rem; line-height: 1.1;
             color: white; margin-bottom: 1rem;
         }
@@ -205,7 +205,7 @@
         .ic-2 .ic-icon { background: #fef3c7; color: var(--amber); }
         .ic-3 .ic-icon { background: #d1fae5; color: var(--green); }
         .ic-label { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); margin-bottom: .25rem; }
-        .ic-value { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--text-1); margin-bottom: .4rem; line-height: 1.1; }
+        .ic-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--text-1); margin-bottom: .4rem; line-height: 1.1; }
         .ic-desc { color: var(--text-2); font-size: .83rem; line-height: 1.65; margin: 0; }
 
         /* ══════════════════════════════════════
@@ -220,7 +220,7 @@
             font-size: .7rem; font-weight: 700; letter-spacing: .2em;
             text-transform: uppercase; padding: .35rem .88rem; border-radius: 30px; margin-bottom: .9rem;
         }
-        .sec-title { font-family: 'DM Serif Display', serif; font-size: 2.1rem; color: var(--text-1); margin-bottom: .9rem; line-height: 1.22; }
+        .sec-title { font-family: 'Poppins', sans-serif; font-size: 2.1rem; color: var(--text-1); margin-bottom: .9rem; line-height: 1.22; }
         .sec-sub   { color: var(--text-2); font-size: .93rem; line-height: 1.8; max-width: 540px; }
 
         /* ══════════════════════════════════════
@@ -275,7 +275,7 @@
         }
         .cta-section::before { content: ""; position: absolute; width: 380px; height: 380px; border-radius: 50%; background: rgba(255,255,255,.04); top: -160px; right: -110px; }
         .cta-section::after  { content: ""; position: absolute; width: 280px; height: 280px; border-radius: 50%; background: rgba(255,255,255,.03); bottom: -110px; left: -70px; }
-        .cta-section h2 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: white; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .cta-section h2 { font-family: 'Poppins', sans-serif; font-size: 2.4rem; color: white; margin-bottom: 1rem; position: relative; z-index: 1; }
         .cta-section p  { color: rgba(255,255,255,.70); max-width: 480px; margin: 0 auto 2.2rem; line-height: 1.8; font-size: .93rem; position: relative; z-index: 1; }
         .btn-cta-white {
             display: inline-flex; align-items: center; gap: .55rem;

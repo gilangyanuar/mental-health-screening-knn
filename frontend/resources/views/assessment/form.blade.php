@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Responden | DASS-21</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
@@ -27,7 +27,7 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--text-1);
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
@@ -105,7 +105,7 @@
         }
         @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(1.5);} }
         .left-title {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 1.9rem; color: white;
             line-height: 1.22; margin-bottom: 1rem;
         }
@@ -150,7 +150,7 @@
             border-radius: 30px; margin-bottom: .9rem;
         }
         .form-title {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 2rem; color: var(--text-1);
             margin-bottom: .5rem; line-height: 1.2;
         }
@@ -207,7 +207,7 @@
             border: 1.5px solid #dce5ff;
             padding: .65rem 1rem;
             font-size: .9rem;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--text-1);
             background: white;
             transition: border-color .2s, box-shadow .2s;
@@ -228,7 +228,7 @@
             border-radius: var(--r-md);
             padding: 1rem;
             font-weight: 700; font-size: .97rem;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; gap: .55rem;
             cursor: pointer;
             transition: background .2s, transform .2s, box-shadow .2s;
