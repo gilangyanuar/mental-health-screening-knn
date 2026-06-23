@@ -535,7 +535,7 @@
             @endif
 
             <!-- FORM -->
-            <form action="/login" method="POST">
+            <form action="{{ route('login', [], false) }}" method="POST">
                 @csrf
 
                 <div class="form-section-title">Kredensial Login</div>

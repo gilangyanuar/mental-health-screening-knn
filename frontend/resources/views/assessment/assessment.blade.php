@@ -1060,7 +1060,7 @@
 
         <form
             id="assessmentForm"
-            action="/predict"
+            action="{{ route('predict', [], false) }}"
             method="POST"
             class="d-none"
         >
@@ -1417,7 +1417,7 @@
 </script>
 
 <!-- JS ASSESSMENT -->
-<script src="{{ asset('js/assessment.js') }}"></script>
+<script src="/js/assessment.js"></script>
 
 </body>
 </html>

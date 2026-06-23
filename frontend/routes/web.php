@@ -15,7 +15,7 @@ Route::post('/assessment', [SkripsiController::class, 'showAssessment'])
     ->name('assessment.index');
 
 // ================= PREDICT =================
-Route::post('/predict', [SkripsiController::class, 'predict']);
+Route::post('/predict', [SkripsiController::class, 'predict'])->name('predict');
 
 // ================= LOGIN =================
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
