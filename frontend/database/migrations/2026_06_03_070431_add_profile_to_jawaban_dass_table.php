@@ -11,25 +11,47 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (! Schema::hasTable('jawaban_dass')) {
+            return;
+        }
+
         Schema::table('jawaban_dass', function (Blueprint $table) {
 
-            $table->string('nama_lengkap')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'nama_lengkap')) {
+                $table->string('nama_lengkap')->nullable();
+            }
 
-            $table->string('universitas')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'universitas')) {
+                $table->string('universitas')->nullable();
+            }
 
-            $table->string('prodi')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'prodi')) {
+                $table->string('prodi')->nullable();
+            }
 
-            $table->string('jenis_kelamin')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'jenis_kelamin')) {
+                $table->string('jenis_kelamin')->nullable();
+            }
 
-            $table->string('semester')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'semester')) {
+                $table->string('semester')->nullable();
+            }
 
-            $table->integer('usia')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'usia')) {
+                $table->integer('usia')->nullable();
+            }
 
-            $table->string('status_ta')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'status_ta')) {
+                $table->string('status_ta')->nullable();
+            }
 
-            $table->string('jam_tidur')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'jam_tidur')) {
+                $table->string('jam_tidur')->nullable();
+            }
 
-            $table->string('bekerja')->nullable();
+            if (! Schema::hasColumn('jawaban_dass', 'bekerja')) {
+                $table->string('bekerja')->nullable();
+            }
 
         });
     }
@@ -39,21 +61,29 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('jawaban_dass', function (Blueprint $table) {
+        if (! Schema::hasTable('jawaban_dass')) {
+            return;
+        }
 
-            $table->dropColumn([
+        $columns = array_filter([
+            Schema::hasColumn('jawaban_dass', 'nama_lengkap') ? 'nama_lengkap' : null,
+            Schema::hasColumn('jawaban_dass', 'universitas') ? 'universitas' : null,
+            Schema::hasColumn('jawaban_dass', 'prodi') ? 'prodi' : null,
+            Schema::hasColumn('jawaban_dass', 'jenis_kelamin') ? 'jenis_kelamin' : null,
+            Schema::hasColumn('jawaban_dass', 'semester') ? 'semester' : null,
+            Schema::hasColumn('jawaban_dass', 'usia') ? 'usia' : null,
+            Schema::hasColumn('jawaban_dass', 'status_ta') ? 'status_ta' : null,
+            Schema::hasColumn('jawaban_dass', 'jam_tidur') ? 'jam_tidur' : null,
+            Schema::hasColumn('jawaban_dass', 'bekerja') ? 'bekerja' : null,
+        ]);
 
-                'nama_lengkap',
-                'universitas',
-                'prodi',
-                'jenis_kelamin',
-                'semester',
-                'usia',
-                'status_ta',
-                'jam_tidur',
-                'bekerja'
+        if ($columns === []) {
+            return;
+        }
 
-            ]);
+        Schema::table('jawaban_dass', function (Blueprint $table) use ($columns) {
+
+            $table->dropColumn($columns);
 
         });
     }
