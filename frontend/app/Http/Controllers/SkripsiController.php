@@ -120,6 +120,12 @@ class SkripsiController extends Controller
 
         // =========================
         // HITUNG DIMENSI DOMINAN
+        // -------------------------
+        // FIX: array_search(max(...)) akan selalu memilih key PERTAMA
+        // ('Stres') ketika semua skor sama (termasuk semua 0), sehingga
+        // responden dengan skor 0-0-0 keliru diberi label "dominan Stres".
+        // Perbaikan: anggap TIDAK ADA dimensi dominan jika skor maksimum
+        // bernilai 0, atau jika lebih dari satu dimensi sama-sama tertinggi.
         // =========================
 
         $scores = [
@@ -127,7 +133,17 @@ class SkripsiController extends Controller
             'Kecemasan' => $kecemasan,
             'Depresi'   => $depresi,
         ];
-        $dimensiDominan = array_search(max($scores), $scores);
+
+        $maxScore       = max($scores);
+        $jumlahYangSama = count(array_filter($scores, fn($v) => $v === $maxScore));
+
+        if ($maxScore === 0 || $jumlahYangSama > 1) {
+            // Semua skor 0, ATAU ada lebih dari satu dimensi dengan nilai
+            // tertinggi yang sama -> tidak ada dimensi yang benar-benar dominan
+            $dimensiDominan = null;
+        } else {
+            $dimensiDominan = array_search($maxScore, $scores);
+        }
 
 
         // =========================
@@ -159,10 +175,14 @@ class SkripsiController extends Controller
             // Contoh: "Stres" + "Berat" = "Stres Berat"
             //         "Kecemasan" + "Sangat Berat" = "Kecemasan Sangat Berat"
             //         "Normal" tetap "Normal"
+            //
+            // FIX: jika tidak ada dimensi dominan (null), tampilkan label
+            // level saja tanpa embel-embel nama dimensi, supaya tidak
+            // muncul badge yang menyesatkan (mis. "Stres" pada skor 0-0-0).
             // =========================
 
-            if (strtolower($labelFlask) === 'normal') {
-                $prediksi = 'Normal';
+            if (strtolower($labelFlask) === 'normal' || $dimensiDominan === null) {
+                $prediksi = $labelFlask;
             } else {
                 $prediksi = $dimensiDominan . ' ' . $labelFlask;
             }
@@ -199,7 +219,7 @@ class SkripsiController extends Controller
             'total_skor_kecemasan' => $kecemasan,
             'total_skor_depresi'   => $depresi,
             'label_knn'            => $prediksi,
-            'dimensi_dominan'      => $dimensiDominan,
+            'dimensi_dominan'      => $dimensiDominan, // bisa null sekarang, pastikan kolom DB nullable
             'jenis_data'           => 'testing',
         ]);
 
@@ -236,8 +256,14 @@ class SkripsiController extends Controller
     // =========================
 
     private function hitungPrediksiManual(
-        int $stres, int $kecemasan, int $depresi, string $dimensiDominan
+        int $stres, int $kecemasan, int $depresi, ?string $dimensiDominan
     ): string {
+
+        // FIX: jika tidak ada dimensi dominan (semua skor 0 atau seri),
+        // langsung kembalikan "Normal" tanpa mencoba hitung level.
+        if ($dimensiDominan === null) {
+            return 'Normal';
+        }
 
         // Ambil skor dimensi dominan
         $skor = match($dimensiDominan) {

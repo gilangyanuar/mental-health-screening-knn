@@ -256,7 +256,7 @@
     <div class="left-panel">
         <a href="/" class="left-brand">
             <div class="left-brand-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
-            DASS-21
+            Sampai Tenang
         </a>
 
         <div class="left-content">

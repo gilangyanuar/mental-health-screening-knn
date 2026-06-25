@@ -910,7 +910,7 @@
 
             <span class="brand-dot"></span>
 
-            DASS-21
+            Sampai Tenang
 
         </a>
 

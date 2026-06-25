@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DASS-21 — Assessment Kesehatan Mental Mahasiswa</title>
+    <title>Sampai Tenang — Assessment Kesehatan Mental Mahasiswa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -349,7 +349,7 @@
             <a href="/" class="nav-brand">
                 <div class="nav-brand-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
                 <div>
-                    <div class="nav-brand-text">DASS-21</div>
+                    <div class="nav-brand-text">Sampai Tenang</div>
                     <div class="nav-brand-sub">Mental Health Assessment</div>
                 </div>
             </a>
@@ -518,7 +518,7 @@
             <div class="col-lg-4 col-md-12">
                 <div class="footer-brand-row">
                     <div class="footer-brand-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
-                    <div class="footer-brand-name">DASS-21</div>
+                    <div class="footer-brand-name">Sampai Tenang</div>
                 </div>
                 <p class="footer-desc">Platform assessment kesehatan mental untuk mahasiswa berbasis instrumen DASS-21 dengan metode klasifikasi K-Nearest Neighbor.</p>
             </div>
@@ -549,8 +549,8 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-copy">© 2026 DASS-21 Mental Health Assessment. Seluruh hak dilindungi.</div>
-            <div class="footer-badge"><span class="fbdot"></span>DASS-21 · KNN Algorithm · Laravel</div>
+            <div class="footer-copy">© 2026 Sampai Tenang Mental Health Assessment. Seluruh hak dilindungi.</div>
+            <div class="footer-badge"><span class="fbdot"></span>Sampai Tenang · DASS-21 · KNN Algorithm · Laravel</div>
         </div>
     </div>
 </footer>

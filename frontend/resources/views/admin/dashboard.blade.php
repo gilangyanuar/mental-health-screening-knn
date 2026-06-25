@@ -231,7 +231,7 @@
     <!-- SIDEBAR -->
     <div class="sidebar">
         <div>
-            <a href="/" class="sidebar-brand"><span class="brand-dot"></span>DASS-21</a>
+            <a href="/" class="sidebar-brand"><span class="brand-dot"></span>Sampai Tenang</a>
             <div class="sidebar-sep">Menu</div>
             <nav class="sidebar-nav">
                 <a href="#" class="sidebar-link active"><i class="bi bi-speedometer2"></i>Dashboard</a>

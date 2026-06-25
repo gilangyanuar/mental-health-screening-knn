@@ -195,7 +195,7 @@
         <div class="navbar-inner">
             <a href="/" class="nav-brand">
                 <div class="nav-brand-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
-                DASS-21
+                Sampai Tenang
             </a>
             <div class="navbar-steps">
                 <div class="nstep done"><div class="nstep-dot"><i class="bi bi-check2" style="font-size:.65rem;"></i></div>Data Responden</div>

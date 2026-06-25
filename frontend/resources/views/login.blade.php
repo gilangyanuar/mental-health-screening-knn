@@ -442,7 +442,7 @@
 
         <a href="/" class="left-brand">
             <span class="brand-dot"></span>
-            DASS-21
+            Sampai Tenang
         </a>
 
         <div class="left-content">
