@@ -33,8 +33,13 @@ let currentIdx   = 0;
 window._answers  = {};
 
 // =========================
+// COOLDOWN — cegah spam klik jawaban
+// =========================
+let _answerLocked = false;
+const ANSWER_DELAY = 600; // ms jeda antar klik jawaban
+
+// =========================
 // TOAST NOTIFICATION
-// Inject sekali ke DOM, lalu reuse
 // =========================
 
 (function injectToast() {
@@ -142,6 +147,13 @@ window._answers  = {};
             background: #e8eeff;
             color: #1b3afe;
         }
+
+        /* Visual feedback saat jawaban dikunci */
+        .answer-locked {
+            pointer-events: none !important;
+            opacity: 0.7 !important;
+        }
+
         @media (max-width: 576px) {
             #dass-toast {
                 width: calc(100vw - 1.5rem);
@@ -187,7 +199,6 @@ function showSkippedToast(skippedList) {
     document.getElementById('toast-msg').textContent =
         'Ketuk nomor soal di bawah untuk langsung ke soal tersebut, atau klik "Lanjutkan" untuk mengisinya satu per satu.';
 
-    // Chips: satu per soal yang terlewat + tombol Lanjutkan
     const chips = document.getElementById('toast-chips');
     chips.innerHTML = '';
 
@@ -203,7 +214,6 @@ function showSkippedToast(skippedList) {
         chips.appendChild(chip);
     });
 
-    // Tombol "Lanjutkan ke soal pertama yang kosong"
     const btn = document.createElement('button');
     btn.className = 'toast-chip';
     btn.style.background = '#1b3afe';
@@ -220,17 +230,14 @@ function showSkippedToast(skippedList) {
     const toast = document.getElementById('dass-toast');
     toast.classList.add('show');
 
-    // Auto-hide setelah 10 detik
     clearTimeout(_toastTimer);
     _toastTimer = setTimeout(hideToast, 10000);
 }
 
 function hideToast() {
-
     clearTimeout(_toastTimer);
     const toast = document.getElementById('dass-toast');
     if (toast) toast.classList.remove('show');
-
 }
 
 // =========================
@@ -247,93 +254,109 @@ function showQuestion() {
         return;
     }
 
-    // teks soal
     document.getElementById('question-text').textContent = question.q;
-
-    // update semua UI: progress, nomor, dots, kategori, animasi, btn prev
     syncProgressUI(currentIdx + 1, total, question.cat);
 
-    // highlight jawaban sebelumnya kalau soal ini sudah pernah dijawab
     const prev = window._answers[currentIdx + 1];
     highlightAnswer(prev !== undefined ? prev : -1);
 
-    // render tombol Next / Submit
     renderNextButton();
 }
 
 // =========================
-// PILIH JAWABAN
+// PILIH JAWABAN — dengan cooldown anti-spam
 // =========================
 
 function selectAnswer(value) {
 
+    // Tolak klik jika masih dalam jeda
+    if (_answerLocked) return;
+
     const question = questions[currentIdx];
     if (!question) return;
 
-    // simpan jawaban
+    // Kunci input segera
+    _answerLocked = true;
+    lockAnswerButtons(true);
+
+    // Simpan jawaban & update UI
     window._answers[currentIdx + 1] = value;
-
-    // highlight pilihan yang dipilih
     highlightAnswer(value);
-
-    // update tombol next
     renderNextButton();
 
-    // tutup toast kalau soal ini baru saja diisi
-    // (untuk kasus user menjawab setelah toast muncul)
+    // Tutup/update toast jika sedang tampil
     const toast = document.getElementById('dass-toast');
     if (toast && toast.classList.contains('show')) {
-        // cek apakah masih ada soal yang kelewat
         const remaining = getSkippedList();
         if (remaining.length === 0) {
             hideToast();
         } else {
-            // refresh chips di toast
             showSkippedToast(remaining);
         }
     }
 
-    // kalau bukan soal terakhir, auto maju setelah 300ms
-    // — loncat ke soal kosong berikutnya (bukan sekadar +1)
     const isLast = (currentIdx === questions.length - 1);
+
     if (!isLast) {
+        // Auto maju ke soal berikutnya setelah ANSWER_DELAY ms
         setTimeout(() => {
             currentIdx = findNextUnanswered(currentIdx);
             showQuestion();
-        }, 300);
+            // Buka kunci SETELAH soal baru tampil
+            // (tambah 50ms buffer agar transisi selesai dulu)
+            setTimeout(() => {
+                _answerLocked = false;
+                lockAnswerButtons(false);
+            }, 50);
+        }, ANSWER_DELAY);
+    } else {
+        // Soal terakhir — buka kunci lebih cepat (tidak auto-submit)
+        setTimeout(() => {
+            _answerLocked = false;
+            lockAnswerButtons(false);
+        }, ANSWER_DELAY);
     }
 }
 
 // =========================
+// KUNCI / BUKA TOMBOL JAWABAN
+// =========================
+
+function lockAnswerButtons(lock) {
+    const btns = document.querySelectorAll('[onclick^="selectAnswer"]');
+    btns.forEach(btn => {
+        if (lock) {
+            btn.classList.add('answer-locked');
+        } else {
+            btn.classList.remove('answer-locked');
+        }
+    });
+}
+
+// =========================
 // CARI SOAL KOSONG BERIKUTNYA
-// Mulai dari afterIdx+1, wrap dari awal kalau perlu
-// Kalau semua sudah diisi, kembalikan soal terakhir
 // =========================
 
 function findNextUnanswered(afterIdx) {
 
     const total = questions.length;
 
-    // cari dari afterIdx+1 ke akhir
     for (let i = afterIdx + 1; i < total; i++) {
         if (window._answers[i + 1] === undefined) return i;
     }
 
-    // kalau tidak ada, cari dari awal sampai afterIdx
     for (let i = 0; i < afterIdx; i++) {
         if (window._answers[i + 1] === undefined) return i;
     }
 
-    // semua sudah dijawab → tetap di soal terakhir (akan submit)
     return total - 1;
 }
 
 // =========================
-// AMBIL DAFTAR SOAL YANG BELUM DIJAWAB
+// AMBIL DAFTAR SOAL BELUM DIJAWAB
 // =========================
 
 function getSkippedList() {
-
     const skipped = [];
     for (let i = 1; i <= questions.length; i++) {
         if (window._answers[i] === undefined) skipped.push(i);
@@ -356,7 +379,6 @@ function nextQuestion() {
         return;
     }
 
-    // loncat ke soal kosong berikutnya, bukan sekadar +1
     currentIdx = findNextUnanswered(currentIdx);
     showQuestion();
 }
@@ -366,7 +388,6 @@ function nextQuestion() {
 // =========================
 
 function prevQuestion() {
-
     if (currentIdx <= 0) return;
     currentIdx--;
     showQuestion();
@@ -393,7 +414,6 @@ function renderNextButton() {
     `;
 
     if (isLast) {
-
         wrap.innerHTML = `
             <button
                 type="button"
@@ -410,9 +430,7 @@ function renderNextButton() {
                 <i class="bi bi-check2-circle"></i>
                 Selesai & Lihat Hasil
             </button>`;
-
     } else {
-
         wrap.innerHTML = `
             <button
                 type="button"
@@ -438,20 +456,15 @@ function renderNextButton() {
 
 function submitForm() {
 
-    // cari soal yang belum dijawab
     const skipped = getSkippedList();
 
     if (skipped.length > 0) {
-
-        // tampilkan toast, loncat ke soal pertama yang kosong
         showSkippedToast(skipped);
         currentIdx = skipped[0] - 1;
         showQuestion();
         return;
-
     }
 
-    // semua sudah dijawab — isi hidden input lalu submit
     for (let i = 1; i <= 21; i++) {
         const el = document.getElementById('q' + i);
         if (el) el.value = window._answers[i] ?? 0;

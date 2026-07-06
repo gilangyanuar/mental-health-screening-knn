@@ -3,277 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Responden | DASS-21</title>
+    <title>Form Responden | Sampai Tenang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
-            --navy:       #0f1f6e;
-            --blue:       #1b3afe;
-            --blue-mid:   #5f7cff;
-            --blue-light: #e8eeff;
-            --blue-soft:  #f0f4ff;
-            --green:      #059669;
-            --amber:      #d97706;
-            --text-1:     #0d1540;
-            --text-2:     #4a5480;
-            --text-3:     #8892b8;
-            --r-xl: 28px; --r-lg: 20px; --r-md: 14px; --r-sm: 10px;
-            --shadow-lg: 0 32px 80px rgba(15,31,110,.13);
-            --shadow-sm: 0 6px 20px rgba(15,31,110,.06);
+            --navy:      #0b1a2e;
+            --navy-mid:  #112240;
+            --teal:      #00c9a7;
+            --teal-mid:  #00b49a;
+            --off-white: #f2ede8;
+            --white:     #ffffff;
+            --text-dark: #0b1a2e;
+            --text-mid:  #4a5568;
+            --text-muted:#8896ab;
+            --border:    #dde3ea;
+            --r-lg: 14px;
+            --r-md: 10px;
+            --required:  #dc2626;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Poppins', sans-serif;
-            color: var(--text-1);
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
-            background: linear-gradient(135deg,#eef1fb 0%,#e8eeff 50%,#f0f6ff 100%);
-        }
-        body::before {
-            content: "";
-            position: fixed; inset: 0; z-index: -1;
-            background:
-                radial-gradient(ellipse 60% 40% at 0% 0%, rgba(27,58,254,.10) 0%, transparent 55%),
-                radial-gradient(ellipse 50% 45% at 100% 0%, rgba(124,58,237,.08) 0%, transparent 50%),
-                radial-gradient(ellipse 55% 40% at 100% 100%, rgba(5,150,105,.07) 0%, transparent 50%),
-                radial-gradient(ellipse 50% 40% at 0% 100%, rgba(56,189,248,.08) 0%, transparent 50%);
-            pointer-events: none;
+            background: var(--off-white);
         }
 
-        /* ── LAYOUT SPLIT ── */
-        .page-wrap {
-            display: flex;
-            min-height: 100vh;
-        }
+        .page-wrap { display: flex; min-height: 100vh; }
 
-        /* ── LEFT PANEL ── */
+        /* ── LEFT SIDEBAR ── */
         .left-panel {
-            width: 380px;
-            flex-shrink: 0;
-            background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
-            padding: 3rem 2.5rem;
-            display: flex;
-            flex-direction: column;
+            width: 240px; flex-shrink: 0;
+            background: var(--navy);
+            padding: 2rem 1.6rem;
+            display: flex; flex-direction: column;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            height: 100vh;
+            position: sticky; top: 0; height: 100vh;
             overflow: hidden;
         }
         .left-panel::before {
-            content: "";
-            position: absolute;
-            width: 280px; height: 280px; border-radius: 50%;
-            background: rgba(255,255,255,.05);
-            top: -100px; right: -100px;
+            content: ""; position: absolute;
+            width: 180px; height: 180px; border-radius: 50%;
+            background: rgba(0,201,167,.06);
+            top: -70px; right: -70px; pointer-events: none;
         }
-        .left-panel::after {
-            content: "";
-            position: absolute;
-            width: 200px; height: 200px; border-radius: 50%;
-            background: rgba(255,255,255,.04);
-            bottom: -70px; left: -70px;
-        }
+
         .left-brand {
-            display: flex; align-items: center; gap: .6rem;
-            color: white; text-decoration: none;
-            font-weight: 700; font-size: 1.05rem;
-            position: relative; z-index: 1;
+            display: flex; align-items: center; gap: .5rem;
+            text-decoration: none; position: relative; z-index: 1;
         }
         .left-brand-icon {
-            width: 36px; height: 36px; border-radius: 9px;
-            background: rgba(255,255,255,.15);
+            width: 28px; height: 28px; border-radius: 7px;
+            background: var(--teal);
             display: flex; align-items: center; justify-content: center;
-            font-size: .95rem;
+            color: var(--navy); font-size: .72rem;
         }
+        .left-brand-text { font-size: .88rem; font-weight: 600; color: var(--white); }
+
         .left-content { position: relative; z-index: 1; }
         .left-badge {
-            display: inline-flex; align-items: center; gap: .45rem;
-            background: rgba(255,255,255,.12);
-            color: rgba(255,255,255,.9);
-            font-size: .7rem; font-weight: 700; letter-spacing: .18em;
-            text-transform: uppercase; padding: .4rem .9rem;
-            border-radius: 30px; margin-bottom: 1.4rem;
+            display: inline-flex; align-items: center; gap: .38rem;
+            background: rgba(0,201,167,.14);
+            border: 1px solid rgba(0,201,167,.22);
+            color: var(--teal);
+            font-size: .6rem; font-weight: 700; letter-spacing: .18em;
+            text-transform: uppercase; padding: .28rem .75rem;
+            border-radius: 30px; margin-bottom: 1.1rem;
         }
         .left-badge .ldot {
-            width: 6px; height: 6px; border-radius: 50%;
-            background: #7fffb0; animation: pulse 2s infinite;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--teal); animation: blink 2s infinite;
         }
-        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(1.5);} }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
         .left-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.9rem; color: white;
-            line-height: 1.22; margin-bottom: 1rem;
+            font-size: 1.35rem; font-weight: 600; line-height: 1.3;
+            color: var(--white); margin-bottom: .85rem;
         }
-        .left-title em { font-style: italic; color: rgba(255,255,255,.72); }
-        .left-desc { color: rgba(255,255,255,.62); font-size: .88rem; line-height: 1.8; margin-bottom: 2rem; }
+        .left-title em { font-style: italic; color: var(--teal); font-weight: 300; }
+        .left-desc {
+            font-size: .75rem; color: rgba(255,255,255,.45);
+            line-height: 1.8; margin-bottom: 2rem;
+        }
 
-        /* STEP INDICATOR */
-        .left-steps { display: flex; flex-direction: column; gap: .75rem; }
-        .step-row { display: flex; align-items: center; gap: .85rem; }
+        .left-steps { display: flex; flex-direction: column; gap: .55rem; }
+        .step-row { display: flex; align-items: center; gap: .7rem; }
         .step-num {
-            width: 32px; height: 32px; border-radius: 9px;
+            width: 26px; height: 26px; border-radius: 7px;
             display: flex; align-items: center; justify-content: center;
-            font-size: .82rem; font-weight: 700; flex-shrink: 0;
-            background: rgba(255,255,255,.1); color: rgba(255,255,255,.55);
+            font-size: .75rem; font-weight: 700; flex-shrink: 0;
         }
-        .step-row.active .step-num { background: white; color: var(--blue); }
-        .step-row.done  .step-num { background: rgba(127,255,176,.2); color: #7fffb0; }
-        .step-label { font-size: .87rem; font-weight: 500; color: rgba(255,255,255,.55); }
-        .step-row.active .step-label { color: white; font-weight: 700; }
-        .step-row.done  .step-label { color: rgba(255,255,255,.75); }
+        .step-row.inactive .step-num { background: rgba(255,255,255,.07); color: rgba(255,255,255,.25); }
+        .step-row.active   .step-num { background: var(--teal); color: var(--navy); }
+        .step-label { font-size: .78rem; font-weight: 500; }
+        .step-row.inactive .step-label { color: rgba(255,255,255,.3); }
+        .step-row.active   .step-label { color: var(--white); font-weight: 600; }
 
         .left-footer { position: relative; z-index: 1; }
-        .left-footer p { color: rgba(255,255,255,.38); font-size: .77rem; line-height: 1.7; }
+        .left-footer p { font-size: .68rem; color: rgba(255,255,255,.28); line-height: 1.7; }
 
         /* ── RIGHT PANEL ── */
         .right-panel {
             flex: 1;
-            overflow-y: auto;
+            display: flex; align-items: center; justify-content: center;
             padding: 3rem 3.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            overflow-y: auto;
         }
+        .form-inner { width: 100%; max-width: 800px; }
 
-        /* FORM HEADER */
-        .form-top { margin-bottom: 2.5rem; }
         .form-eyebrow {
-            display: inline-block;
-            background: var(--blue-light); color: var(--blue);
-            font-size: .7rem; font-weight: 700; letter-spacing: .2em;
-            text-transform: uppercase; padding: .35rem .88rem;
-            border-radius: 30px; margin-bottom: .9rem;
+            font-size: .6rem; font-weight: 700; letter-spacing: .2em;
+            text-transform: uppercase; color: var(--teal-mid);
+            display: flex; align-items: center; gap: .45rem;
+            margin-bottom: .65rem;
+        }
+        .form-eyebrow::before {
+            content: ""; display: inline-block;
+            width: 18px; height: 1.5px;
+            background: var(--teal-mid); border-radius: 2px;
         }
         .form-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem; color: var(--text-1);
-            margin-bottom: .5rem; line-height: 1.2;
+            font-size: 2.2rem; font-weight: 700;
+            color: var(--text-dark); margin-bottom: .35rem; line-height: 1.2;
         }
-        .form-subtitle { color: var(--text-2); font-size: .9rem; line-height: 1.7; }
+        .form-subtitle {
+            font-size: .83rem; color: var(--text-mid);
+            line-height: 1.7; margin-bottom: 1.8rem;
+        }
 
-        /* ANONYMOUS BOX */
+        /* Anonymous box */
         .anon-box {
-            display: flex; align-items: center; gap: 1rem;
-            background: var(--blue-soft);
-            border: 1.5px solid rgba(27,58,254,.12);
+            display: flex; align-items: center; gap: .85rem;
+            background: var(--white);
+            border: 1.5px solid var(--border);
             border-radius: var(--r-lg);
             padding: 1rem 1.3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             cursor: pointer;
-            transition: border-color .2s, background .2s;
+            transition: border-color .2s;
         }
-        .anon-box:hover { border-color: var(--blue); background: var(--blue-light); }
+        .anon-box:hover { border-color: #b0bec5; }
         .anon-icon {
-            width: 42px; height: 42px; border-radius: 12px;
-            background: var(--blue-light); color: var(--blue);
+            width: 42px; height: 42px; border-radius: 11px;
+            background: #f0f4f8; color: var(--text-mid);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem; flex-shrink: 0;
+            font-size: .95rem; flex-shrink: 0;
         }
-        .anon-text strong { display: block; font-size: .9rem; color: var(--text-1); font-weight: 600; }
-        .anon-text small  { color: var(--text-2); font-size: .8rem; }
-        .anon-check {
-            margin-left: auto; flex-shrink: 0;
-            width: 20px; height: 20px; border-radius: 6px;
-            border: 2px solid #c5cdf0; cursor: pointer;
-            accent-color: var(--blue);
+        .anon-text strong { display: block; font-size: .9rem; color: var(--text-dark); font-weight: 600; }
+        .anon-text small  { color: var(--text-muted); font-size: .8rem; }
+
+        .toggle-wrap { margin-left: auto; flex-shrink: 0; }
+        .toggle-switch { position: relative; width: 42px; height: 22px; display: inline-block; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute; cursor: pointer; inset: 0;
+            border-radius: 22px; background: #d1d5db; transition: background .2s;
+        }
+        .toggle-slider::before {
+            content: ""; position: absolute;
+            width: 16px; height: 16px; border-radius: 50%;
+            background: white; left: 3px; top: 3px;
+            transition: transform .2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,.15);
+        }
+        .toggle-switch input:checked + .toggle-slider { background: var(--teal); }
+        .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+        /* Section label */
+        .fsec {
+            font-size: .6rem; font-weight: 700; letter-spacing: .18em;
+            text-transform: uppercase; color: var(--text-muted);
+            display: flex; align-items: center; gap: .55rem;
+            margin-bottom: .85rem;
+        }
+        .fsec::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+        /* Wajib */
+        .required-star {
+            color: var(--required);
+            font-weight: 700;
+            margin-left: .15rem;
         }
 
-        /* SECTION TITLE */
-        .fsec-title {
-            font-size: .7rem; font-weight: 700; letter-spacing: .18em;
-            text-transform: uppercase; color: var(--text-3);
-            margin-bottom: 1.1rem;
-            display: flex; align-items: center; gap: .6rem;
-        }
-        .fsec-title::after {
-            content: ""; flex: 1; height: 1px;
-            background: rgba(27,58,254,.1);
-        }
-
-        /* FORM ELEMENTS */
+        /* Inputs */
         .form-label {
-            font-weight: 600; font-size: .84rem;
-            color: var(--text-1); margin-bottom: .45rem;
+            font-weight: 500; font-size: .85rem;
+            color: var(--text-dark); margin-bottom: .42rem;
+            display: block;
         }
-        .form-control,
-        .form-select {
+        .form-control, .form-select {
             border-radius: var(--r-md);
-            min-height: 50px;
-            border: 1.5px solid #dce5ff;
-            padding: .65rem 1rem;
-            font-size: .9rem;
+            height: 52px;
+            border: 1.5px solid var(--border);
+            padding: 0 1rem;
+            font-size: .92rem;
             font-family: 'Poppins', sans-serif;
-            color: var(--text-1);
-            background: white;
+            color: var(--text-dark);
+            background: var(--white);
+            width: 100%;
             transition: border-color .2s, box-shadow .2s;
+            display: block;
         }
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 3px rgba(27,58,254,.09);
+        .form-control:focus, .form-select:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0,201,167,.1);
             outline: none;
         }
-        .form-control::placeholder { color: var(--text-3); }
-        .form-control[readonly] { background: var(--blue-soft); color: var(--text-2); }
+        .form-control::placeholder { color: var(--text-muted); font-size: .84rem; }
+        .form-control[readonly] { background: #f5f7fa; color: var(--text-mid); cursor: not-allowed; }
 
-        /* SUBMIT */
+        .form-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238896ab' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 2.5rem;
+            cursor: pointer;
+        }
+        .form-select option { color: var(--text-dark); }
+
+        .field-group { margin-bottom: 1rem; }
+
+        /* ── KETERANGAN WAJIB ── */
+        .required-note {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            margin-top: .5rem;
+            margin-bottom: .2rem;
+            font-size: .72rem;
+            color: var(--text-muted);
+        }
+        .required-note .star {
+            color: var(--required);
+            font-weight: 700;
+        }
+        .required-note strong {
+            color: var(--required);
+        }
+
         .btn-submit {
             width: 100%;
-            background: var(--blue); color: white; border: none;
+            background: var(--navy); color: var(--white); border: none;
             border-radius: var(--r-md);
-            padding: 1rem;
-            font-weight: 700; font-size: .97rem;
+            height: 58px;
+            font-weight: 600; font-size: .95rem;
             font-family: 'Poppins', sans-serif;
-            display: flex; align-items: center; justify-content: center; gap: .55rem;
+            display: flex; align-items: center; justify-content: center; gap: .5rem;
             cursor: pointer;
-            transition: background .2s, transform .2s, box-shadow .2s;
-            box-shadow: 0 8px 24px rgba(27,58,254,.3);
-            margin-top: 1.5rem;
+            transition: background .2s, transform .15s;
+            margin-top: 1.6rem;
+            letter-spacing: .01em;
         }
-        .btn-submit:hover { background: #1228dd; transform: translateY(-2px); box-shadow: 0 14px 32px rgba(27,58,254,.4); }
+        .btn-submit:hover { background: #0d2540; transform: translateY(-1px); }
 
-        /* RESPONSIVE */
         @media(max-width: 991px) {
             .left-panel { display: none; }
             .right-panel { padding: 2.5rem 2rem; }
         }
         @media(max-width: 576px) {
             .right-panel { padding: 2rem 1.2rem; }
-            .form-title { font-size: 1.7rem; }
+            .form-title  { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-
 <div class="page-wrap">
 
-    <!-- ══ LEFT PANEL ══ -->
+    <!-- LEFT -->
     <div class="left-panel">
         <a href="/" class="left-brand">
-            <div class="left-brand-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
-            Sampai Tenang
+            <div class="left-brand-icon"><i class="bi bi-pin-angle-fill"></i></div>
+            <span class="left-brand-text">Sampai Tenang</span>
         </a>
 
         <div class="left-content">
             <div class="left-badge"><span class="ldot"></span>Student Assessment</div>
             <h2 class="left-title">Kenali Kondisi <em>Mentalmu</em> Lebih Awal</h2>
-            <p class="left-desc">Isi data dirimu terlebih dahulu sebelum memulai assessment. Data kamu bersifat rahasia dan hanya digunakan untuk keperluan analisis.</p>
-
+            <p class="left-desc">Isi data dirimu terlebih dahulu sebelum memulai assessment. Data kamu bersifat rahasia dan hanya digunakan untuk keperluan penelitian.</p>
             <div class="left-steps">
                 <div class="step-row active">
                     <div class="step-num">1</div>
                     <div class="step-label">Isi Data Responden</div>
                 </div>
-                <div class="step-row">
+                <div class="step-row inactive">
                     <div class="step-num">2</div>
                     <div class="step-label">Jawab 21 Pertanyaan</div>
                 </div>
-                <div class="step-row">
+                <div class="step-row inactive">
                     <div class="step-num">3</div>
                     <div class="step-label">Lihat Hasil Assessment</div>
                 </div>
@@ -281,143 +301,161 @@
         </div>
 
         <div class="left-footer">
-            <p>Hasil assessment bukan diagnosis klinis resmi.<br>Konsultasikan ke profesional jika diperlukan.</p>
+            <p>Hasil assessment bukan diagnosis klinis resmi. Konsultasikan ke profesional jika diperlukan.</p>
         </div>
     </div>
 
-    <!-- ══ RIGHT PANEL ══ -->
+    <!-- RIGHT -->
     <div class="right-panel">
-        <div style="max-width:640px;width:100%;margin:auto;">
+        <div class="form-inner">
 
-            <!-- HEADER -->
-            <div class="form-top">
-                <span class="form-eyebrow">DASS-21 Respondent Form</span>
-                <h1 class="form-title">Lengkapi Data Dirimu</h1>
-                <p class="form-subtitle">Data digunakan untuk analisis assessment psikologis. Seluruh informasi bersifat rahasia dan aman.</p>
-            </div>
+            <div class="form-eyebrow">DASS-21 Respondent Form</div>
+            <h1 class="form-title">Lengkapi Data Dirimu</h1>
+            <p class="form-subtitle">Data digunakan untuk analisis assessment psikologis. Seluruh informasi bersifat rahasia dan aman.</p>
 
-            <!-- FORM -->
+            <!-- ANONYMOUS -->
+            <label class="anon-box" for="anonToggle">
+                <div class="anon-icon"><i class="bi bi-person-dash"></i></div>
+                <div class="anon-text">
+                    <strong>Isi sebagai Anonymous</strong>
+                    <small>Identitasmu tidak akan disimpan atau ditampilkan di hasil</small>
+                </div>
+                <div class="toggle-wrap">
+                    <label class="toggle-switch" onclick="event.stopPropagation()">
+                        <input type="checkbox" id="anonToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </label>
+
             <form action="{{ route('assessment.index') }}" method="POST">
                 @csrf
 
-                <!-- ANONYMOUS -->
-                <label class="anon-box" for="anonymousCheck">
-                    <div class="anon-icon"><i class="bi bi-incognito"></i></div>
-                    <div class="anon-text">
-                        <strong>Isi sebagai Anonymous</strong>
-                        <small>Identitasmu tidak akan ditampilkan di hasil assessment</small>
+                <!-- DATA PRIBADI -->
+                <div class="fsec">Data Pribadi</div>
+                <div class="row g-4 mb-4">
+                    <div class="col-6">
+                        <div class="field-group">
+                            <label class="form-label">Nama Lengkap <span class="required-star">*</span></label>
+                            <input type="text" id="namaInput" name="nama_lengkap"
+                                class="form-control" placeholder="Masukkan nama lengkap" required>
+                        </div>
                     </div>
-                    <input class="anon-check" type="checkbox" id="anonymousCheck">
-                </label>
-
-                <!-- ── SEKSI 1: DATA PRIBADI ── -->
-                <div class="fsec-title">Data Pribadi</div>
-                <div class="row g-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Nama Lengkap</label>
-                        <input type="text" id="namaInput" name="nama_lengkap"
-                               class="form-control" placeholder="Masukkan nama lengkap" required>
+                    <div class="col-6">
+                        <div class="field-group">
+                            <label class="form-label">Universitas <span class="required-star">*</span></label>
+                            <input type="text" name="universitas"
+                                class="form-control" placeholder="Nama universitas" required>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" class="form-select" required>
-                            <option value="">Pilih jenis kelamin</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
+                    <div class="col-6">
+                        <div class="field-group">
+                            <label class="form-label">Program Studi <span class="required-star">*</span></label>
+                            <input type="text" name="prodi"
+                                class="form-control" placeholder="Contoh: Teknik Informatika" required>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Universitas</label>
-                        <input type="text" name="universitas"
-                               class="form-control" placeholder="Nama universitas" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Program Studi</label>
-                        <input type="text" name="prodi"
-                               class="form-control" placeholder="Contoh: Teknik Informatika" required>
+                    <div class="col-6">
+                        <div class="field-group">
+                            <label class="form-label">Jenis Kelamin <span class="required-star">*</span></label>
+                            <select name="jenis_kelamin" class="form-select" required>
+                                <option value="" disabled selected>Pilih jenis kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <!-- ── SEKSI 2: DATA AKADEMIK ── -->
-                <div class="fsec-title mt-2">Data Akademik</div>
-                <div class="row g-3 mb-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Semester</label>
-                        <select name="semester" class="form-select" required>
-                            <option value="">Pilih semester</option>
-                            <option value="Semester 7">Semester 7</option>
-                            <option value="Semester 8">Semester 8</option>
-                            <option value="Semester 9">Semester 9</option>
-                            <option value="Semester 10">Semester 10</option>
-                            <option value="Semester 11">Semester 11</option>
-                            <option value="Semester 12">Semester 12</option>
-                        </select>
+                <!-- DATA AKADEMIK -->
+                <div class="fsec">Data Akademik</div>
+                <div class="row g-4 mb-4">
+                    <div class="col-4">
+                        <div class="field-group">
+                            <label class="form-label">Semester <span class="required-star">*</span></label>
+                            <select name="semester" class="form-select" required>
+                                <option value="" disabled selected>Pilih semester</option>
+                                @for($s = 7; $s <= 14; $s++)
+                                <option value="Semester {{ $s }}">Semester {{ $s }}</option>
+                                @endfor
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Usia</label>
-                        <input type="number" name="usia"
-                               class="form-control" placeholder="Contoh: 22"
-                               min="17" max="40" required>
+                    <div class="col-4">
+                        <div class="field-group">
+                            <label class="form-label">Usia <span class="required-star">*</span></label>
+                            <input type="number" name="usia"
+                                class="form-control" placeholder="Contoh: 22"
+                                min="17" max="40" required>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Status Tugas Akhir</label>
-                        <select name="status_ta" class="form-select" required>
-                            <option value="">Pilih status</option>
-                            <option value="SEMPRO">Seminar Proposal</option>
-                            <option value="SEMHAS">Seminar Hasil</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- ── SEKSI 3: KEBIASAAN ── -->
-                <div class="fsec-title mt-2">Kebiasaan Sehari-hari</div>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Rata-rata Jam Tidur per Malam</label>
-                        <select name="jam_tidur" class="form-select" required>
-                            <option value="">Pilih durasi tidur</option>
-                            <option value="< 5 Jam">Kurang dari 5 jam</option>
-                            <option value="5 - 6 Jam">5 – 6 jam</option>
-                            <option value="7 - 8 Jam">7 – 8 jam</option>
-                            <option value="> 8 Jam">Lebih dari 8 jam</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Apakah Kamu Sedang Bekerja?</label>
-                        <select name="bekerja" class="form-select" required>
-                            <option value="">Pilih status pekerjaan</option>
-                            <option value="Ya">Ya, sedang bekerja</option>
-                            <option value="Tidak">Tidak, fokus kuliah</option>
-                        </select>
+                    <div class="col-4">
+                        <div class="field-group">
+                            <label class="form-label">Status TA <span class="required-star">*</span></label>
+                            <select name="status_ta" class="form-select" required>
+                                <option value="" disabled selected>Pilih status</option>
+                                <option value="SEMPRO">Seminar Proposal</option>
+                                <option value="SEMHAS">Seminar Hasil</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <!-- SUBMIT -->
+                <!-- KEBIASAAN -->
+                <div class="fsec">Kebiasaan Sehari-hari</div>
+                <div class="row g-4">
+                    <div class="col-6">
+                        <div class="field-group">
+                            <label class="form-label">Rata-rata Jam Tidur <span class="required-star">*</span></label>
+                            <select name="jam_tidur" class="form-select" required>
+                                <option value="" disabled selected>Pilih jam tidur</option>
+                                <option value="< 5 Jam">Kurang dari 5 jam</option>
+                                <option value="5 - 6 Jam">5 – 6 jam</option>
+                                <option value="7 - 8 Jam">7 – 8 jam</option>
+                                <option value="> 8 Jam">Lebih dari 8 jam</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="field-group">
+                            <label class="form-label">Sedang Bekerja? <span class="required-star">*</span></label>
+                            <select name="bekerja" class="form-select" required>
+                                <option value="" disabled selected>Pilih status</option>
+                                <option value="Ya">Ya, sedang bekerja</option>
+                                <option value="Tidak">Tidak, fokus kuliah</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KETERANGAN WAJIB ISI -->
+                <div class="required-note">
+                    <span class="star">*</span>
+                    <span>Semua field bertanda <strong>*</strong> wajib diisi.</span>
+                </div>
+
                 <button type="submit" class="btn-submit">
-                    <i class="bi bi-arrow-right-circle-fill"></i>
                     Lanjut ke Assessment DASS-21
                 </button>
 
             </form>
         </div>
     </div>
-
 </div>
 
 <script>
-    const anonymousCheck = document.getElementById('anonymousCheck');
-    const namaInput      = document.getElementById('namaInput');
-
-    anonymousCheck.addEventListener('change', function () {
-        if (this.checked) {
-            namaInput.value = 'Anonymous';
-            namaInput.setAttribute('readonly', true);
-        } else {
-            namaInput.value = '';
-            namaInput.removeAttribute('readonly');
-        }
-    });
+const anonToggle = document.getElementById('anonToggle');
+const namaInput  = document.getElementById('namaInput');
+anonToggle.addEventListener('change', function() {
+    if (this.checked) {
+        namaInput.value = 'Anonymous';
+        namaInput.setAttribute('readonly', true);
+    } else {
+        namaInput.value = '';
+        namaInput.removeAttribute('readonly');
+        namaInput.focus();
+    }
+});
 </script>
-
 </body>
 </html>

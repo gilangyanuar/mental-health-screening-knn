@@ -18,6 +18,11 @@ class HasilTes extends Model
         'label_knn',
         'dimensi_dominan',
         'jenis_data',
+        'tanggal_tes',   // ← tambahan
+    ];
+
+    protected $casts = [
+        'tanggal_tes' => 'datetime',
     ];
 
     public function mahasiswa()

@@ -221,6 +221,7 @@ class SkripsiController extends Controller
             'label_knn'            => $prediksi,
             'dimensi_dominan'      => $dimensiDominan, // bisa null sekarang, pastikan kolom DB nullable
             'jenis_data'           => 'testing',
+            'tanggal_tes'          => now(), // ← tambahan
         ]);
 
         // 3. Simpan detail jawaban Q1-Q21

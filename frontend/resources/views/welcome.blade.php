@@ -3,564 +3,608 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sampai Tenang — Assessment Kesehatan Mental Mahasiswa</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Sampai Tenang — Kesehatan Mental Mahasiswa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        :root {
-            --navy: #0f1f6e;
-            --blue: #1b3afe;
-            --blue-mid: #5f7cff;
-            --blue-light: #e8eeff;
-            --blue-soft: #f0f4ff;
-            --green: #059669;
-            --amber: #d97706;
-            --text-1: #0d1540;
-            --text-2: #4a5480;
-            --text-3: #8892b8;
-            --r-xl: 28px; --r-lg: 20px; --r-md: 14px; --r-sm: 10px;
-            --shadow-lg: 0 32px 80px rgba(15,31,110,.13);
-            --shadow-md: 0 16px 48px rgba(15,31,110,.09);
-            --shadow-sm: 0 6px 20px rgba(15,31,110,.06);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-
-        /* ══════════════════════════════════════
-           BACKGROUND
-        ══════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: 'Poppins', sans-serif;
-            color: var(--text-1);
+            color: #0a1628;
+            background: #fff;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            background-color: #edf0fb;
-        }
-        /* Layer dot pattern di atas semua section putih */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background-image: radial-gradient(circle, rgba(27,58,254,.22) 1.5px, transparent 1.5px);
-            background-size: 26px 26px;
-            background-color: #edf0fb;
-            pointer-events: none;
         }
 
-        /* ══════════════════════════════════════
-           NAVBAR — sticky, selalu nempel atas
-        ══════════════════════════════════════ */
-        .navbar-wrap {
-            background: rgba(255,255,255,.97);
-            border-bottom: 2px solid #e8eeff;
-            box-shadow: 0 2px 18px rgba(15,31,110,.09);
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            z-index: 9999;
+        /* NAVBAR */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            height: 60px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 48px;
+            background: rgba(10,22,40,0);
+            transition: background .3s, border-color .3s;
+            border-bottom: 1px solid transparent;
         }
-        .navbar-inner {
-            height: 68px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .nav.solid {
+            background: rgba(10,22,40,.96);
+            border-color: rgba(255,255,255,.07);
+            backdrop-filter: blur(14px);
         }
-        .nav-brand {
-            display: flex; align-items: center; gap: .65rem;
-            text-decoration: none;
-        }
-        .nav-brand-icon {
-            width: 42px; height: 42px; border-radius: 11px;
-            background: var(--blue);
+        .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .nav-logo {
+            width: 32px; height: 32px; border-radius: 9px;
+            background: #00c9a7;
             display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.1rem;
-            box-shadow: 0 4px 14px rgba(27,58,254,.35);
-            flex-shrink: 0;
+            color: #0a1628; font-size: 14px;
         }
-        .nav-brand-text { font-weight: 700; font-size: 1.15rem; color: var(--navy); line-height: 1.1; }
-        .nav-brand-sub  { font-size: .66rem; color: var(--text-3); font-weight: 500; }
-        .nav-links {
-            display: flex; align-items: center;
-            gap: 2rem; list-style: none;
+        .nav-brand-text { line-height: 1; }
+        .nav-brand-name { font-size: 14px; font-weight: 600; color: #fff; display: block; }
+        .nav-brand-sub  { font-size: 10px; color: rgba(255,255,255,.38); display: block; margin-top: 1px; }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links a { font-size: 13px; color: rgba(255,255,255,.68); text-decoration: none; transition: color .2s; }
+        .nav-links a:hover { color: #fff; }
+        .nav-cta {
+            background: #00c9a7; color: #0a1628;
+            border: none; border-radius: 100px;
+            padding: 8px 20px; font-size: 13px; font-weight: 600;
+            font-family: 'Poppins', sans-serif; cursor: pointer;
+            text-decoration: none; transition: background .2s, transform .15s;
         }
-        .nav-links a {
-            color: var(--text-2); text-decoration: none;
-            font-size: .9rem; font-weight: 500;
-            transition: color .2s;
-        }
-        .nav-links a:hover { color: var(--blue); }
-        /* ── tombol Login Admin — kotak biru dengan padding seimbang ── */
-        .btn-nav {
-            display: inline-flex;
-            align-items: center;
-            background: var(--blue);
-            color: #fff !important;
-            padding: .55rem 1.4rem;
-            border-radius: var(--r-sm);
-            font-weight: 600;
-            font-size: .88rem;
-            text-decoration: none;
-            white-space: nowrap;
-            box-shadow: 0 4px 14px rgba(27,58,254,.3);
-            transition: background .2s, transform .2s, box-shadow .2s;
-            line-height: 1;
-        }
-        .btn-nav:hover {
-            background: #1228dd;
-            transform: translateY(-1px);
-            box-shadow: 0 8px 22px rgba(27,58,254,.42);
-            color: #fff !important;
-        }
+        .nav-cta:hover { background: #00b49a; transform: translateY(-1px); color: #0a1628; }
 
-        /* ══════════════════════════════════════
-           HERO — proporsional seperti Novena
-        ══════════════════════════════════════ */
-        .hero-section {
+        /* HERO */
+        .hero {
+            height: 600px;
             position: relative;
-            height: 70vh;
-            min-height: 460px;
-            max-height: 660px;
             display: flex; align-items: center;
             overflow: hidden;
         }
-        .hero-bg { position: absolute; inset: 0; z-index: 0; }
-        .hero-bg img {
+        .hero-img { position: absolute; inset: 0; }
+        .hero-img img {
             width: 100%; height: 100%;
-            object-fit: cover; object-position: center 30%;
+            object-fit: cover; object-position: center 60%;
             display: block;
         }
-        .hero-bg::after {
-            content: ""; position: absolute; inset: 0;
-            background: linear-gradient(
-                108deg,
-                rgba(9,17,57,.92) 0%,
-                rgba(9,17,57,.76) 38%,
-                rgba(9,17,57,.28) 64%,
-                transparent 100%
-            );
+        .hero-img::after {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                linear-gradient(90deg,
+                    rgba(10,22,40,.92) 0%,
+                    rgba(10,22,40,.70) 40%,
+                    rgba(10,22,40,.30) 70%,
+                    rgba(10,22,40,.10) 100%),
+                linear-gradient(180deg,
+                    rgba(10,22,40,.15) 0%,
+                    rgba(10,22,40,.0)  50%,
+                    rgba(10,22,40,.35) 100%);
         }
-        .hero-content {
+        .hero-body {
             position: relative; z-index: 1;
+            padding: 0 48px;
             max-width: 560px;
         }
         .hero-eyebrow {
-            display: inline-flex; align-items: center; gap: .5rem;
-            font-size: .7rem; font-weight: 700; letter-spacing: .22em;
-            text-transform: uppercase; color: rgba(255,255,255,.6);
-            margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 10px;
+            font-size: 10px; font-weight: 700; letter-spacing: .2em;
+            text-transform: uppercase; color: #00c9a7;
+            margin-bottom: 20px;
         }
         .hero-eyebrow::before {
-            content: ""; width: 24px; height: 2px;
-            background: var(--blue-mid); border-radius: 2px; flex-shrink: 0;
+            content: ''; width: 28px; height: 2px;
+            background: #00c9a7; border-radius: 2px; flex-shrink: 0;
         }
         .hero-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.9rem; line-height: 1.1;
-            color: white; margin-bottom: 1rem;
+            font-size: 44px; font-weight: 700;
+            color: #fff; line-height: 1.12;
+            margin-bottom: 18px;
         }
-        .hero-title em { font-style: italic; color: var(--blue-mid); }
+        .hero-title em { font-style: italic; color: #00c9a7; font-weight: 400; display: block; }
         .hero-desc {
-            color: rgba(255,255,255,.70); line-height: 1.8;
-            font-size: .95rem; margin-bottom: 1.8rem; max-width: 450px;
+            font-size: 14px; color: rgba(255,255,255,.72);
+            line-height: 1.85; margin-bottom: 32px;
+            max-width: 420px;
         }
-        .hero-actions { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; }
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
         .btn-primary-hero {
-            display: inline-flex; align-items: center; gap: .55rem;
-            background: var(--blue); color: white;
-            padding: .88rem 1.9rem; border-radius: var(--r-sm);
-            font-weight: 700; font-size: .95rem; text-decoration: none;
-            transition: all .2s; box-shadow: 0 8px 24px rgba(27,58,254,.45);
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #00c9a7; color: #0a1628;
+            border: none; border-radius: 100px;
+            padding: 13px 26px; font-size: 14px; font-weight: 700;
+            font-family: 'Poppins', sans-serif; cursor: pointer;
+            text-decoration: none; transition: all .2s;
         }
-        .btn-primary-hero:hover { background: #1228dd; transform: translateY(-2px); color: white; }
-        .btn-outline-hero {
-            display: inline-flex; align-items: center; gap: .55rem;
-            background: rgba(255,255,255,.1); color: white;
-            border: 1.5px solid rgba(255,255,255,.3);
-            padding: .88rem 1.6rem; border-radius: var(--r-sm);
-            font-weight: 600; font-size: .95rem; text-decoration: none;
-            transition: all .2s;
+        .btn-primary-hero:hover { background: #00b49a; transform: translateY(-2px); color: #0a1628; }
+        .btn-ghost-hero {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: transparent; color: rgba(255,255,255,.78);
+            border: 1.5px solid rgba(255,255,255,.28); border-radius: 100px;
+            padding: 12px 22px; font-size: 14px; font-weight: 500;
+            font-family: 'Poppins', sans-serif; cursor: pointer;
+            text-decoration: none; transition: all .2s;
         }
-        .btn-outline-hero:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.5); color: white; }
+        .btn-ghost-hero:hover { border-color: rgba(255,255,255,.6); color: #fff; }
 
-        /* ══════════════════════════════════════
-           INFO CARDS — overlap bawah hero
-        ══════════════════════════════════════ */
-        .info-cards-wrap { position: relative; z-index: 2; margin-top: -56px; }
-        .info-card {
-            background: white; border-radius: var(--r-xl);
-            padding: 1.8rem;
-            box-shadow: 0 20px 60px rgba(15,31,110,.14), 0 0 0 1px rgba(27,58,254,.05);
-            height: 100%; display: flex; flex-direction: column;
-            border-top: 4px solid transparent;
-            transition: transform .25s, box-shadow .25s;
+        /* INFO STRIP */
+        .info-strip { background: #f5f0eb; border-bottom: 1px solid #ede8e2; }
+        .info-strip-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            max-width: 1200px; margin: 0 auto;
         }
-        .info-card:hover { transform: translateY(-4px); box-shadow: 0 28px 68px rgba(15,31,110,.17); }
-        .ic-1 { border-top-color: var(--blue); }
-        .ic-2 { border-top-color: var(--amber); }
-        .ic-3 { border-top-color: var(--green); }
-        .ic-icon { width: 48px; height: 48px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
-        .ic-1 .ic-icon { background: var(--blue-light); color: var(--blue); }
-        .ic-2 .ic-icon { background: #fef3c7; color: var(--amber); }
-        .ic-3 .ic-icon { background: #d1fae5; color: var(--green); }
-        .ic-label { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); margin-bottom: .25rem; }
-        .ic-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--text-1); margin-bottom: .4rem; line-height: 1.1; }
-        .ic-desc { color: var(--text-2); font-size: .83rem; line-height: 1.65; margin: 0; }
-
-        /* ══════════════════════════════════════
-           SECTIONS — bergantian putih & soft
-        ══════════════════════════════════════ */
-        .sec-white { background: white; }
-        .sec-soft  { background: var(--blue-soft); }
-        .sec-py    { padding: 5.5rem 0; }
-
-        .sec-label {
-            display: inline-block; background: var(--blue-light); color: var(--blue);
-            font-size: .7rem; font-weight: 700; letter-spacing: .2em;
-            text-transform: uppercase; padding: .35rem .88rem; border-radius: 30px; margin-bottom: .9rem;
+        .info-cell { padding: 40px 48px; border-right: 1px solid #ede8e2; }
+        .info-cell:last-child { border-right: none; }
+        .info-cell-label {
+            font-size: 10px; font-weight: 700; letter-spacing: .18em;
+            text-transform: uppercase; color: #aaa; margin-bottom: 8px;
         }
-        .sec-title { font-family: 'Poppins', sans-serif; font-size: 2.1rem; color: var(--text-1); margin-bottom: .9rem; line-height: 1.22; }
-        .sec-sub   { color: var(--text-2); font-size: .93rem; line-height: 1.8; max-width: 540px; }
+        .info-cell-value {
+            font-size: 40px; font-weight: 700; color: #0a1628;
+            line-height: 1; margin-bottom: 4px;
+            display: flex; align-items: baseline; gap: 6px;
+        }
+        .info-cell-value .unit { font-size: 16px; font-weight: 500; color: #00b49a; }
+        .info-cell-desc { font-size: 12.5px; color: #666; line-height: 1.7; margin-top: 8px; }
 
-        /* ══════════════════════════════════════
-           ABOUT
-        ══════════════════════════════════════ */
-        .about-photo { border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-md); height: 100%; min-height: 420px; }
+        /* 3 dimensi di info strip — selaras tema navy/teal */
+        .dim-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+        .dim-item { display: flex; align-items: center; gap: 12px; }
+        .dim-dot {
+            width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+        }
+        .dim-name { font-size: 16px; font-weight: 600; color: #0a1628; }
+        /* semua dot pakai warna navy-teal yang selaras tema */
+        .dim-item.stres   .dim-dot { background: #0a1628; }
+        .dim-item.cemas   .dim-dot { background: #00b49a; }
+        .dim-item.depresi .dim-dot { background: #0a1628; opacity: .45; }
+
+        /* SECTION */
+        .section { padding: 88px 0; }
+        .section-sm { padding: 64px 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+        .eyebrow {
+            font-size: 10px; font-weight: 700; letter-spacing: .18em;
+            text-transform: uppercase; color: #00b49a;
+            display: block; margin-bottom: 12px;
+        }
+        .section-title { font-size: 34px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+        .section-title em { font-style: italic; font-weight: 400; }
+        .section-sub { font-size: 14px; line-height: 1.8; }
+
+        /* FITUR */
+        .sec-fitur { background: #0d1f3c; }
+        .sec-fitur .section-title { color: #fff; }
+        .sec-fitur .eyebrow { color: #00c9a7; }
+        .feat-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 16px; overflow: hidden;
+            margin-top: 40px;
+        }
+        .feat-card { background: rgba(255,255,255,.03); padding: 32px 28px; transition: background .2s; }
+        .feat-card:hover  { background: rgba(255,255,255,.07); }
+        .feat-card.active { background: #112240; }
+        .feat-icon {
+            width: 40px; height: 40px; border-radius: 11px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; margin-bottom: 16px;
+        }
+        .feat-icon.teal  { background: rgba(0,201,167,.14); color: #00c9a7; }
+        .feat-icon.amber { background: rgba(245,158,11,.14); color: #f59e0b; }
+        .feat-card h4 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .feat-card p  { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.75; margin: 0; }
+
+        /* TENTANG */
+        .sec-tentang { background: #f5f0eb; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .about-photo { border-radius: 16px; overflow: hidden; height: 420px; }
         .about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .about-stat { display: flex; flex-direction: column; gap: .85rem; margin-top: 2rem; }
-        .astat { display: flex; align-items: center; gap: .9rem; background: var(--blue-soft); border-radius: var(--r-lg); padding: .9rem 1.2rem; border: 1px solid rgba(27,58,254,.08); }
-        .astat-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--blue-light); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-        .astat-val { font-size: .97rem; font-weight: 700; color: var(--text-1); }
-        .astat-lbl { font-size: .78rem; color: var(--text-3); margin-top: 1px; }
-
-        /* ══════════════════════════════════════
-           FEATURE CARDS
-        ══════════════════════════════════════ */
-        .feature-card {
-            background: white; border: 1px solid rgba(27,58,254,.07);
-            border-radius: var(--r-xl); padding: 1.8rem; height: 100%;
-            transition: transform .25s, box-shadow .25s; position: relative; overflow: hidden;
+        .about-title { font-size: 32px; font-weight: 700; color: #0a1628; line-height: 1.25; margin-bottom: 16px; }
+        .about-title em { font-style: italic; font-weight: 400; }
+        .about-desc { font-size: 13.5px; color: #555; line-height: 1.85; margin-bottom: 28px; }
+        .about-stats { display: flex; flex-direction: column; gap: 10px; }
+        .astat {
+            display: flex; align-items: center; gap: 14px;
+            background: rgba(0,0,0,.04); border: 1px solid rgba(0,0,0,.07);
+            border-radius: 10px; padding: 14px 18px;
         }
-        .feature-card::after { content: ""; position: absolute; width: 120px; height: 120px; border-radius: 50%; bottom: -40px; right: -40px; pointer-events: none; }
-        .fc-s::after { background: radial-gradient(circle, rgba(217,119,6,.09), transparent 70%); }
-        .fc-a::after { background: radial-gradient(circle, rgba(27,58,254,.09), transparent 70%); }
-        .fc-d::after { background: radial-gradient(circle, rgba(220,38,38,.07), transparent 70%); }
-        .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-        .feat-icon { width: 52px; height: 52px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.2rem; }
-        .fi-s { background: #fef3c7; color: #d97706; }
-        .fi-a { background: var(--blue-light); color: var(--blue); }
-        .fi-d { background: #fee2e2; color: #dc2626; }
-        .feature-card h5 { font-weight: 700; color: var(--text-1); margin-bottom: .5rem; font-size: .97rem; }
-        .feature-card p  { color: var(--text-2); font-size: .87rem; line-height: 1.78; margin: 0; }
-
-        /* ══════════════════════════════════════
-           STEPS
-        ══════════════════════════════════════ */
-        .steps-box { background: white; border-radius: var(--r-xl); padding: 2.8rem; border: 1px solid rgba(27,58,254,.07); box-shadow: var(--shadow-sm); }
-        .step-item { display: flex; gap: 1.2rem; padding: 1.2rem 0; border-bottom: 1px solid rgba(27,58,254,.07); }
-        .step-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .step-num { width: 42px; height: 42px; border-radius: 11px; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; box-shadow: 0 6px 16px rgba(27,58,254,.3); }
-        .step-title { font-weight: 700; color: var(--text-1); font-size: .95rem; margin-bottom: .25rem; }
-        .step-desc  { color: var(--text-2); font-size: .86rem; line-height: 1.72; margin: 0; }
-
-        /* ══════════════════════════════════════
-           CTA
-        ══════════════════════════════════════ */
-        .cta-section {
-            background: linear-gradient(135deg, var(--navy) 0%, #1b3afe 100%);
-            border-radius: var(--r-xl); padding: 4.5rem 4rem; text-align: center;
-            position: relative; overflow: hidden;
-            box-shadow: 0 28px 72px rgba(15,31,110,.22);
+        .astat-icon {
+            width: 36px; height: 36px; border-radius: 9px;
+            background: rgba(0,180,154,.1); color: #00b49a;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; flex-shrink: 0;
         }
-        .cta-section::before { content: ""; position: absolute; width: 380px; height: 380px; border-radius: 50%; background: rgba(255,255,255,.04); top: -160px; right: -110px; }
-        .cta-section::after  { content: ""; position: absolute; width: 280px; height: 280px; border-radius: 50%; background: rgba(255,255,255,.03); bottom: -110px; left: -70px; }
-        .cta-section h2 { font-family: 'Poppins', sans-serif; font-size: 2.4rem; color: white; margin-bottom: 1rem; position: relative; z-index: 1; }
-        .cta-section p  { color: rgba(255,255,255,.70); max-width: 480px; margin: 0 auto 2.2rem; line-height: 1.8; font-size: .93rem; position: relative; z-index: 1; }
-        .btn-cta-white {
-            display: inline-flex; align-items: center; gap: .55rem;
-            background: white; color: var(--navy);
-            padding: 1rem 2.2rem; border-radius: var(--r-sm);
-            font-weight: 700; font-size: .97rem; text-decoration: none;
-            position: relative; z-index: 1;
-            box-shadow: 0 10px 32px rgba(0,0,0,.2);
-            transition: transform .2s, box-shadow .2s;
+        .astat-title { font-size: 13.5px; font-weight: 600; color: #0a1628; }
+        .astat-sub   { font-size: 12px; color: #888; margin-top: 1px; }
+
+        /* CARA KERJA */
+        .sec-cara { background: #fff; }
+        .cara-head {
+            display: flex; align-items: flex-end;
+            justify-content: space-between; margin-bottom: 48px;
         }
-        .btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,.28); color: var(--navy); }
-
-        /* ══════════════════════════════════════
-           FAQ
-        ══════════════════════════════════════ */
-        .faq-item { border: 1px solid rgba(27,58,254,.09) !important; border-radius: var(--r-lg) !important; overflow: hidden; margin-bottom: .65rem; box-shadow: none !important; background: white; }
-        .accordion-button { font-weight: 600; color: var(--text-1); font-size: .92rem; background: white; padding: 1.1rem 1.4rem; }
-        .accordion-button:not(.collapsed) { background: var(--blue-soft); color: var(--blue); box-shadow: none; }
-        .accordion-button:focus { box-shadow: none; }
-        .accordion-body { color: var(--text-2); line-height: 1.78; font-size: .87rem; padding: .9rem 1.4rem 1.3rem; background: var(--blue-soft); }
-
-        /* ══════════════════════════════════════
-           FOOTER
-        ══════════════════════════════════════ */
-        .footer-section { background: var(--navy); padding: 4rem 0 0; }
-        .footer-brand-row  { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
-        .footer-brand-icon { width: 36px; height: 36px; border-radius: 9px; background: var(--blue); display: flex; align-items: center; justify-content: center; color: white; font-size: .92rem; }
-        .footer-brand-name { font-weight: 700; color: white; font-size: 1.05rem; }
-        .footer-desc { color: rgba(255,255,255,.32); font-size: .82rem; line-height: 1.72; }
-        .footer-heading { font-weight: 700; color: rgba(255,255,255,.45); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1.1rem; display: block; }
-        .footer-links-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; padding: 0; }
-        .footer-links-list li a { color: rgba(255,255,255,.35); text-decoration: none; font-size: .86rem; transition: color .2s; display: inline-flex; align-items: center; gap: .4rem; }
-        .footer-links-list li a:hover { color: rgba(255,255,255,.78); }
-        .footer-bottom { margin-top: 3rem; padding: 1.4rem 0; border-top: 1px solid rgba(255,255,255,.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
-        .footer-copy  { color: rgba(255,255,255,.2); font-size: .77rem; }
-        .footer-badge { display: flex; align-items: center; gap: .4rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.35); font-size: .7rem; font-weight: 600; padding: .3rem .85rem; border-radius: 20px; }
-        .fbdot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue-mid); }
-
-        /* ══════════════════════════════════════
-           FADE UP ANIMATION
-        ══════════════════════════════════════ */
-        .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-        /* ══════════════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════════════ */
-        @media(max-width: 991px) {
-            .hero-title { font-size: 2.5rem; }
-            .info-cards-wrap { margin-top: 2rem; }
-            .cta-section { padding: 3rem 2rem; }
-            .steps-box { padding: 2rem 1.8rem; }
+        .link-mulai {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 13px; font-weight: 600; color: #00b49a;
+            text-decoration: none; transition: gap .2s;
         }
-        @media(max-width: 768px) {
-            .hero-title { font-size: 2rem; }
+        .link-mulai:hover { gap: 10px; color: #00b49a; }
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+        .step { padding: 0 32px; border-right: 1px solid #ede8e2; }
+        .step:first-child { padding-left: 0; }
+        .step:last-child  { border-right: none; padding-right: 0; }
+        .step-num {
+            font-size: 72px; font-weight: 700; font-style: italic;
+            color: rgba(0,0,0,.06); line-height: 1; margin-bottom: 12px;
+        }
+        .step h4 { font-size: 15px; font-weight: 600; color: #0a1628; margin-bottom: 8px; }
+        .step p  { font-size: 13px; color: #666; line-height: 1.8; margin: 0; }
+
+        /* CTA */
+        .sec-cta { background: #0d1f3c; padding: 72px 0; position: relative; overflow: hidden; }
+        .sec-cta::before {
+            content: ''; position: absolute;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: rgba(0,201,167,.05);
+            top: -200px; right: -100px;
+        }
+        .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+        .cta-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: rgba(0,201,167,.1); border: 1px solid rgba(0,201,167,.2);
+            color: #00c9a7; border-radius: 100px;
+            padding: 5px 14px; font-size: 10px; font-weight: 700;
+            letter-spacing: .14em; text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .cta-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #00c9a7; }
+        .cta-title { font-size: 36px; font-weight: 700; color: #fff; line-height: 1.2; }
+        .cta-title em { font-style: italic; font-weight: 400; }
+        .btn-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #00c9a7; color: #0a1628;
+            border: none; border-radius: 100px;
+            padding: 15px 32px; font-size: 14px; font-weight: 700;
+            font-family: 'Poppins', sans-serif; cursor: pointer;
+            text-decoration: none; transition: all .2s;
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .btn-cta:hover { background: #00b49a; transform: translateY(-2px); color: #0a1628; }
+
+        /* FAQ */
+        .sec-faq { background: #f5f0eb; }
+        .sec-faq .section-title { color: #0a1628; }
+        .sec-faq .eyebrow { color: #00b49a; }
+        .faq-wrap {
+            max-width: 700px; margin: 48px auto 0;
+            background: #fff; border-radius: 16px;
+            border: 1px solid rgba(0,0,0,.07); overflow: hidden;
+        }
+        .faq-item { border-bottom: 1px solid rgba(0,0,0,.07); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-btn {
+            width: 100%; background: none; border: none;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 24px; gap: 16px;
+            font-size: 14px; font-weight: 500; color: #0a1628;
+            font-family: 'Poppins', sans-serif; cursor: pointer;
+            text-align: left; transition: background .15s;
+        }
+        .faq-btn:hover { background: rgba(0,0,0,.02); }
+        .faq-chevron { font-size: 14px; color: #aaa; flex-shrink: 0; transition: transform .25s; }
+        .faq-body {
+            font-size: 13.5px; color: #666; line-height: 1.8;
+            padding: 0 24px; max-height: 0;
+            overflow: hidden; transition: max-height .3s ease, padding .3s;
+        }
+        .faq-body.open { max-height: 200px; padding: 0 24px 18px; }
+        .faq-chevron.open { transform: rotate(180deg); }
+
+        /* FOOTER */
+        .footer {
+            background: #0a1628; padding: 24px 48px;
+            border-top: 1px solid rgba(255,255,255,.05);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .footer-brand { display: flex; align-items: center; gap: 10px; }
+        .footer-logo {
+            width: 24px; height: 24px; border-radius: 6px;
+            background: #00c9a7;
+            display: flex; align-items: center; justify-content: center;
+            color: #0a1628; font-size: 11px;
+        }
+        .footer-name { font-size: 13px; font-weight: 600; color: #fff; }
+        .footer-copy { font-size: 12px; color: rgba(255,255,255,.32); }
+
+        /* FADE */
+        .fade { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+        .fade.in { opacity: 1; transform: translateY(0); }
+        .fade.d1 { transition-delay: .08s; }
+        .fade.d2 { transition-delay: .16s; }
+        .fade.d3 { transition-delay: .24s; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero { height: 520px; }
+            .hero-title { font-size: 36px; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-photo { height: 300px; }
+            .cta-inner { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 768px) {
+            .nav { padding: 0 24px; }
             .nav-links { display: none; }
-            .hero-section { height: 60vh; min-height: 400px; }
-            .cta-section h2 { font-size: 1.9rem; }
-            .sec-title { font-size: 1.75rem; }
-            .about-photo { min-height: 260px; margin-bottom: 2rem; }
-            .sec-py { padding: 4rem 0; }
+            .hero { height: 480px; }
+            .hero-body { padding: 0 24px; }
+            .hero-title { font-size: 30px; }
+            .container { padding: 0 24px; }
+            .info-strip-grid { grid-template-columns: 1fr; }
+            .info-cell { border-right: none; border-bottom: 1px solid #ede8e2; padding: 32px 24px; }
+            .feat-cards { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr; gap: 32px; }
+            .step { padding: 0; border-right: none; }
+            .section { padding: 64px 0; }
+            .cara-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .footer { flex-direction: column; gap: 10px; text-align: center; padding: 20px 24px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
-<div class="navbar-wrap">
-    <div class="container">
-        <div class="navbar-inner">
-            <a href="/" class="nav-brand">
-                <div class="nav-brand-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
-                <div>
-                    <div class="nav-brand-text">Sampai Tenang</div>
-                    <div class="nav-brand-sub">Mental Health Assessment</div>
-                </div>
+<!-- NAVBAR -->
+<nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+        <div class="nav-logo"><i class="bi bi-pin-angle-fill"></i></div>
+        <div class="nav-brand-text">
+            <span class="nav-brand-name">Sampai Tenang</span>
+            <span class="nav-brand-sub">Mental Health Assessment</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#fitur">Fitur</a></li>
+        <li><a href="#cara">Cara Kerja</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="{{ route('login') }}" class="nav-cta">Login Admin</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1920&q=80" alt="Mahasiswa wisuda">
+    </div>
+    <div class="hero-body">
+        <div class="hero-eyebrow">Kesehatan Mental Mahasiswa</div>
+        <h1 class="hero-title">
+            Kenali Kondisi<br>
+            <em>Mentalmu</em>
+            Lebih Awal
+        </h1>
+        <p class="hero-desc">Platform assessment psikologis berbasis DASS-21 untuk membantu mahasiswa memahami tingkat stres, kecemasan, dan depresi. Gratis, cepat, hasil langsung tersedia.</p>
+        <div class="hero-actions">
+            <a href="{{ route('assessment.form') }}" class="btn-primary-hero">
+                <i class="bi bi-arrow-right"></i> Mulai Assessment
             </a>
-            <ul class="nav-links">
-                <li><a href="#about">Tentang</a></li>
-                <li><a href="#fitur">Fitur</a></li>
-                <li><a href="#cara">Cara Kerja</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="{{ route('login') }}" class="btn-nav">Login Admin</a></li>
-            </ul>
+            <a href="#tentang" class="btn-ghost-hero">Pelajari Lebih Lanjut</a>
+        </div>
+    </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+    <div class="info-strip-grid">
+        <div class="info-cell fade">
+            <div class="info-cell-label">Jumlah Pertanyaan</div>
+            <div class="info-cell-value">21 <span class="unit">Soal</span></div>
+            <p class="info-cell-desc">Instrumen DASS-21 terstandarisasi yang digunakan secara luas di seluruh dunia.</p>
+        </div>
+        <div class="info-cell fade d1">
+            <div class="info-cell-label">Estimasi Waktu</div>
+            <div class="info-cell-value">5 <span class="unit">Menit</span></div>
+            <p class="info-cell-desc">Selesaikan assessment dan dapatkan hasil analisis kondisi psikologismu secara instan.</p>
+        </div>
+        <!-- Kolom 3: 3 dimensi yang diukur — lebih informatif dari "KNN Algorithm" -->
+        <div class="info-cell fade d2">
+            <div class="info-cell-label">Dimensi yang Diukur</div>
+            <div class="dim-list">
+                <div class="dim-item stres">
+                    <span class="dim-dot"></span>
+                    <span class="dim-name">Stres</span>
+                </div>
+                <div class="dim-item cemas">
+                    <span class="dim-dot"></span>
+                    <span class="dim-name">Kecemasan</span>
+                </div>
+                <div class="dim-item depresi">
+                    <span class="dim-dot"></span>
+                    <span class="dim-name">Depresi</span>
+                </div>
+            </div>
+            <p class="info-cell-desc">Tiga aspek kesehatan mental yang diukur sekaligus dalam satu sesi assessment.</p>
         </div>
     </div>
 </div>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero-section">
-    <div class="hero-bg">
-        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1920&q=80" alt="Suasana kampus" loading="eager">
-    </div>
+<!-- FITUR -->
+<section class="section sec-fitur" id="fitur">
     <div class="container">
-        <div class="hero-content">
-            <div class="hero-eyebrow">Kesehatan Mental Mahasiswa</div>
-            <h1 class="hero-title">Kenali Kondisi<br><em>Mentalmu</em><br>Lebih Awal</h1>
-            <p class="hero-desc">Platform assessment psikologis berbasis DASS-21 untuk membantu mahasiswa memahami tingkat stres, kecemasan, dan depresi. Gratis, cepat, dan hasil langsung tersedia.</p>
-            <div class="hero-actions">
-                <a href="{{ route('assessment.form') }}" class="btn-primary-hero">
-                    <i class="bi bi-clipboard2-pulse-fill"></i>Mulai Assessment
-                </a>
-                <a href="#about" class="btn-outline-hero">
-                    Pelajari Lebih Lanjut <i class="bi bi-arrow-down"></i>
-                </a>
+        <div class="fade">
+            <span class="eyebrow">Fitur Unggulan</span>
+            <h2 class="section-title" style="color:#fff;">Dirancang untuk<br><em>kenyamananmu</em></h2>
+        </div>
+        <div class="feat-cards fade d1">
+            <div class="feat-card">
+                <div class="feat-icon teal"><i class="bi bi-patch-check-fill"></i></div>
+                <h4>Ilmiah & Terstandarisasi</h4>
+                <p>Menggunakan instrumen DASS-21 yang telah divalidasi dan digunakan secara luas oleh profesional kesehatan mental di seluruh dunia.</p>
+            </div>
+            <div class="feat-card active">
+                <div class="feat-icon teal"><i class="bi bi-shield-lock-fill"></i></div>
+                <h4>Privasi Terjaga</h4>
+                <p>Hasil assessment bersifat pribadi. Data kamu diproses dengan aman dan tidak dibagikan kepada siapapun tanpa izinmu.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon amber"><i class="bi bi-lightning-charge-fill"></i></div>
+                <h4>Hasil Instan & Jelas</h4>
+                <p>Langsung dapatkan gambaran tingkat stres, kecemasan, dan depresi beserta panduan tindak lanjut yang mudah dipahami.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ INFO CARDS ═══ -->
-<div class="sec-white">
+<!-- TENTANG -->
+<section class="section sec-tentang" id="tentang">
     <div class="container">
-        <div class="info-cards-wrap">
-            <div class="row g-4">
-                <div class="col-md-4 fade-up">
-                    <div class="info-card ic-1">
-                        <div class="ic-icon"><i class="bi bi-ui-checks-grid"></i></div>
-                        <div class="ic-label">Jumlah Pertanyaan</div>
-                        <div class="ic-value">21 Soal</div>
-                        <p class="ic-desc">Berdasarkan instrumen DASS-21 yang telah terstandarisasi dan digunakan secara luas di seluruh dunia.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 fade-up" style="transition-delay:.1s">
-                    <div class="info-card ic-2">
-                        <div class="ic-icon"><i class="bi bi-clock-history"></i></div>
-                        <div class="ic-label">Estimasi Waktu</div>
-                        <div class="ic-value">5 Menit</div>
-                        <p class="ic-desc">Selesaikan assessment dengan cepat dan dapatkan hasil analisis kondisi psikologismu secara instan.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 fade-up" style="transition-delay:.2s">
-                    <div class="info-card ic-3">
-                        <div class="ic-icon"><i class="bi bi-cpu-fill"></i></div>
-                        <div class="ic-label">Metode Analisis</div>
-                        <div class="ic-value">KNN Algorithm</div>
-                        <p class="ic-desc">Klasifikasi hasil menggunakan algoritma K-Nearest Neighbor dengan tingkat akurasi yang telah terukur.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ═══ ABOUT — putih ═══ -->
-<section id="about" class="sec-white sec-py" style="padding-top:7rem">
-    <div class="container">
-        <div class="row align-items-center gx-5">
-            <div class="col-lg-5 mb-5 mb-lg-0 fade-up">
+        <div class="about-grid">
+            <div class="fade">
                 <div class="about-photo">
                     <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=800&q=80" alt="Mahasiswa berdiskusi">
                 </div>
             </div>
-            <div class="col-lg-7 fade-up" style="transition-delay:.15s">
-                <span class="sec-label">Tentang Platform</span>
-                <h2 class="sec-title">Mengapa Kesehatan Mental Itu Penting?</h2>
-                <p class="sec-sub">Mahasiswa menghadapi berbagai tekanan — akademik, sosial, hingga finansial. Mengenali kondisi psikologis sejak dini adalah langkah pertama untuk menjaga kesejahteraan mental secara menyeluruh.</p>
-                <div class="about-stat">
-                    <div class="astat"><div class="astat-icon"><i class="bi bi-person-check-fill"></i></div><div><div class="astat-val">Mode Anonymous</div><div class="astat-lbl">Bisa diisi tanpa mencantumkan identitas asli</div></div></div>
-                    <div class="astat"><div class="astat-icon"><i class="bi bi-lock-fill"></i></div><div><div class="astat-val">Privasi Terjaga</div><div class="astat-lbl">Data hanya digunakan untuk keperluan analisis</div></div></div>
-                    <div class="astat"><div class="astat-icon"><i class="bi bi-graph-up-arrow"></i></div><div><div class="astat-val">Hasil Instan</div><div class="astat-lbl">Langsung muncul setelah semua pertanyaan selesai</div></div></div>
+            <div class="fade d1">
+                <span class="eyebrow">Tentang Platform</span>
+                <h2 class="about-title">Mengapa Kesehatan Mental <em>Itu Penting?</em></h2>
+                <p class="about-desc">Mahasiswa menghadapi berbagai tekanan akademik, sosial, hingga finansial. Mengenali kondisi psikologis sejak dini adalah langkah pertama untuk menjaga kesejahteraan mental secara menyeluruh.</p>
+                <div class="about-stats">
+                    <div class="astat">
+                        <div class="astat-icon"><i class="bi bi-person-check-fill"></i></div>
+                        <div>
+                            <div class="astat-title">Mode Anonymous</div>
+                            <div class="astat-sub">Bisa diisi tanpa mencantumkan identitas asli</div>
+                        </div>
+                    </div>
+                    <div class="astat">
+                        <div class="astat-icon"><i class="bi bi-lock-fill"></i></div>
+                        <div>
+                            <div class="astat-title">Privasi Terjaga</div>
+                            <div class="astat-sub">Data hanya digunakan untuk keperluan analisis</div>
+                        </div>
+                    </div>
+                    <div class="astat">
+                        <div class="astat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                        <div>
+                            <div class="astat-title">Hasil Instan</div>
+                            <div class="astat-sub">Langsung muncul setelah semua pertanyaan selesai</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ FITUR — biru soft ═══ -->
-<section id="fitur" class="sec-soft sec-py">
+<!-- CARA KERJA -->
+<section class="section sec-cara" id="cara">
     <div class="container">
-        <div class="text-center mb-5 fade-up">
-            <span class="sec-label">Dimensi Pengukuran</span>
-            <h2 class="sec-title">Apa yang Diukur dalam Assessment?</h2>
-            <p class="sec-sub mx-auto text-center">Tiga dimensi psikologis utama yang diukur menggunakan instrumen DASS-21 yang telah terstandarisasi secara internasional.</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4 fade-up"><div class="feature-card fc-s"><div class="feat-icon fi-s"><i class="bi bi-lightning-charge-fill"></i></div><h5>Tingkat Stres</h5><p>Mengukur sejauh mana tekanan akademik dan aktivitas sehari-hari berdampak pada kondisi emosional dan fisik kamu.</p></div></div>
-            <div class="col-md-4 fade-up" style="transition-delay:.1s"><div class="feature-card fc-a"><div class="feat-icon fi-a"><i class="bi bi-cloud-lightning-rain-fill"></i></div><h5>Tingkat Kecemasan</h5><p>Mendeteksi indikasi kecemasan yang muncul akibat tekanan perkuliahan, ujian, tugas akhir, maupun aktivitas kampus.</p></div></div>
-            <div class="col-md-4 fade-up" style="transition-delay:.2s"><div class="feature-card fc-d"><div class="feat-icon fi-d"><i class="bi bi-heartbreak-fill"></i></div><h5>Tingkat Depresi</h5><p>Menganalisis kondisi emosional secara menyeluruh dan memberikan gambaran awal tentang kesejahteraan psikologis kamu.</p></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ CARA KERJA — putih ═══ -->
-<section id="cara" class="sec-white sec-py">
-    <div class="container">
-        <div class="row align-items-center gx-5">
-            <div class="col-lg-5 mb-5 mb-lg-0 fade-up">
-                <span class="sec-label">Cara Kerja</span>
-                <h2 class="sec-title">Hanya 3 Langkah Mudah</h2>
-                <p class="sec-sub">Proses assessment dirancang sesederhana mungkin agar kamu bisa menyelesaikannya kapan saja dan di mana saja.</p>
+        <div class="cara-head fade">
+            <div>
+                <span class="eyebrow">Cara Kerja</span>
+                <h2 class="section-title" style="color:#0a1628;">Tiga langkah<br><em>menuju pemahaman diri</em></h2>
             </div>
-            <div class="col-lg-7 fade-up" style="transition-delay:.15s">
-                <div class="steps-box">
-                    <div class="step-item"><div class="step-num">1</div><div><div class="step-title">Isi Data Diri</div><p class="step-desc">Lengkapi informasi dasar seperti universitas, prodi, dan semester. Tersedia mode anonymous jika tidak ingin mencantumkan nama.</p></div></div>
-                    <div class="step-item"><div class="step-num">2</div><div><div class="step-title">Jawab 21 Pertanyaan</div><p class="step-desc">Jawab setiap pertanyaan dengan jujur sesuai kondisi yang kamu rasakan selama 1 minggu terakhir. Tidak ada jawaban benar atau salah.</p></div></div>
-                    <div class="step-item"><div class="step-num">3</div><div><div class="step-title">Lihat Hasil Assessment</div><p class="step-desc">Dapatkan hasil analisis lengkap mencakup skor stres, kecemasan, dan depresi beserta rekomendasi langkah selanjutnya secara instan.</p></div></div>
-                </div>
+            <a href="{{ route('assessment.form') }}" class="link-mulai">Mulai Sekarang <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="steps-grid fade d1">
+            <div class="step">
+                <div class="step-num">01</div>
+                <h4>Buka Platform</h4>
+                <p>Akses Sampai Tenang lewat browser. Tidak perlu instalasi atau registrasi langsung mulai kapan saja.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <h4>Jawab 21 Pertanyaan</h4>
+                <p>Jawab setiap pertanyaan DASS-21 dengan jujur dan tenang. Hanya membutuhkan sekitar 5 menit.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <h4>Dapatkan Hasil</h4>
+                <p>Sistem menganalisis jawabanmu dan langsung menampilkan tingkat stres, kecemasan, dan depresimu secara jelas.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ CTA — biru soft ═══ -->
-<section class="sec-soft sec-py">
-    <div class="container fade-up">
-        <div class="cta-section">
-            <h2>Mulai Kenali Kondisi Mentalmu</h2>
-            <p>Assessment berlangsung hanya 5 menit. Jawab 21 pertanyaan dengan jujur dan dapatkan hasil analisis kondisi psikologismu secara langsung.</p>
-            <a href="{{ route('assessment.form') }}" class="btn-cta-white"><i class="bi bi-clipboard2-pulse-fill"></i>Mulai Assessment Sekarang</a>
+<!-- CTA -->
+<section class="sec-cta">
+    <div class="container">
+        <div class="cta-inner fade">
+            <div>
+                <div class="cta-badge">Gratis Sepenuhnya</div>
+                <h2 class="cta-title">Satu langkah menuju<br><em>dirimu yang lebih baik</em></h2>
+            </div>
+            <a href="{{ route('assessment.form') }}" class="btn-cta">
+                Mulai Assessment <i class="bi bi-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>
 
-<!-- ═══ FAQ — putih ═══ -->
-<section id="faq" class="sec-white sec-py">
+<!-- FAQ -->
+<section class="section sec-faq" id="faq">
     <div class="container">
-        <div class="text-center mb-5 fade-up">
-            <span class="sec-label">FAQ</span>
-            <h2 class="sec-title">Pertanyaan yang Sering Ditanyakan</h2>
+        <div class="fade" style="text-align:center;">
+            <span class="eyebrow">FAQ</span>
+            <h2 class="section-title" style="color:#0a1628;">Pertanyaan yang Sering <em>Ditanyakan</em></h2>
         </div>
-        <div class="row justify-content-center fade-up">
-            <div class="col-lg-8">
-                <div class="accordion" id="faqAccordion">
-                    <div class="accordion-item faq-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">Apakah assessment ini gratis?</button></h2><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">Ya, sepenuhnya gratis. Kamu bisa mengisi assessment kapan saja tanpa perlu mendaftar atau membuat akun.</div></div></div>
-                    <div class="accordion-item faq-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Apakah data saya aman dan terjaga privasinya?</button></h2><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Ya. Seluruh data yang kamu masukkan dijaga kerahasiaannya. Kamu juga dapat memilih mode anonymous agar identitas tidak ditampilkan.</div></div></div>
-                    <div class="accordion-item faq-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">Berapa lama waktu yang dibutuhkan?</button></h2><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Assessment terdiri dari 21 pertanyaan dan dapat diselesaikan dalam kurang lebih 5 menit.</div></div></div>
-                    <div class="accordion-item faq-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">Apakah hasil assessment ini adalah diagnosis resmi?</button></h2><div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Tidak. Hasil assessment ini merupakan screening awal. Jika kamu merasa memerlukan bantuan lebih lanjut, sebaiknya berkonsultasi dengan psikolog atau konselor profesional.</div></div></div>
-                    <div class="accordion-item faq-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">Apakah saya bisa mengisi assessment lebih dari sekali?</button></h2><div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Ya, kamu bisa mengisi assessment kapan saja. Disarankan untuk melakukannya secara berkala agar bisa memantau perkembangan kondisi psikologismu.</div></div></div>
-                </div>
+        <div class="faq-wrap fade d1">
+            @foreach([
+                ['q'=>'Apakah assessment ini gratis?','a'=>'Ya, sepenuhnya gratis. Kamu bisa mengisi assessment kapan saja tanpa perlu mendaftar atau membuat akun.'],
+                ['q'=>'Apakah data saya aman dan terjaga privasinya?','a'=>'Ya. Seluruh data yang kamu masukkan dijaga kerahasiaannya. Kamu juga dapat memilih mode anonymous agar identitas tidak ditampilkan.'],
+                ['q'=>'Berapa lama waktu yang dibutuhkan?','a'=>'Assessment terdiri dari 21 pertanyaan dan dapat diselesaikan dalam kurang lebih 5 menit.'],
+                ['q'=>'Apakah hasil assessment ini adalah diagnosis resmi?','a'=>'Tidak. Hasil assessment ini merupakan screening awal. Jika kamu memerlukan bantuan lebih lanjut, sebaiknya berkonsultasi dengan psikolog atau konselor profesional.'],
+                ['q'=>'Apakah saya bisa mengisi assessment lebih dari sekali?','a'=>'Ya, kamu bisa mengisi assessment kapan saja. Disarankan secara berkala agar bisa memantau perkembangan kondisi psikologismu.'],
+            ] as $i => $f)
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq({{ $i }},this)">
+                    {{ $f['q'] }}
+                    <i class="bi bi-chevron-down faq-chevron" id="chev{{ $i }}"></i>
+                </button>
+                <div class="faq-body" id="faqB{{ $i }}">{{ $f['a'] }}</div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
-<footer class="footer-section">
-    <div class="container">
-        <div class="row g-5 align-items-start">
-            <div class="col-lg-4 col-md-12">
-                <div class="footer-brand-row">
-                    <div class="footer-brand-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
-                    <div class="footer-brand-name">Sampai Tenang</div>
-                </div>
-                <p class="footer-desc">Platform assessment kesehatan mental untuk mahasiswa berbasis instrumen DASS-21 dengan metode klasifikasi K-Nearest Neighbor.</p>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6">
-                <span class="footer-heading">Menu</span>
-                <ul class="footer-links-list">
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#fitur">Dimensi Ukur</a></li>
-                    <li><a href="#cara">Cara Kerja</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6">
-                <span class="footer-heading">Legal</span>
-                <ul class="footer-links-list">
-                    <li><a href="#">Kebijakan Privasi</a></li>
-                    <li><a href="#">Ketentuan Penggunaan</a></li>
-                    <li><a href="#">Disclaimer</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 col-md-4 col-12 offset-lg-1">
-                <span class="footer-heading">Mulai Sekarang</span>
-                <ul class="footer-links-list">
-                    <li><a href="{{ route('assessment.form') }}"><i class="bi bi-clipboard2-pulse"></i>Mulai Assessment</a></li>
-                    <li><a href="#cara"><i class="bi bi-info-circle"></i>Cara Kerja</a></li>
-                    <li><a href="{{ route('login') }}"><i class="bi bi-shield-lock"></i>Login Admin</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="footer-copy">© 2026 Sampai Tenang Mental Health Assessment. Seluruh hak dilindungi.</div>
-            <div class="footer-badge"><span class="fbdot"></span>Sampai Tenang · DASS-21 · KNN Algorithm · Laravel</div>
-        </div>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-brand">
+        <div class="footer-logo"><i class="bi bi-pin-angle-fill"></i></div>
+        <span class="footer-name">Sampai Tenang</span>
     </div>
+    <span class="footer-copy">© 2025 Sampai Tenang · Platform Assessment Kesehatan Mental Mahasiswa</span>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('solid', window.scrollY > 20);
+});
+
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+let cur = -1;
+function toggleFaq(i, btn) {
+    const body = document.getElementById('faqB' + i);
+    const chev = document.getElementById('chev' + i);
+    if (cur === i) {
+        body.classList.remove('open');
+        chev.classList.remove('open');
+        cur = -1;
+    } else {
+        if (cur >= 0) {
+            document.getElementById('faqB' + cur).classList.remove('open');
+            document.getElementById('chev' + cur).classList.remove('open');
+        }
+        body.classList.add('open');
+        chev.classList.add('open');
+        cur = i;
+    }
+}
 </script>
 </body>
 </html>
