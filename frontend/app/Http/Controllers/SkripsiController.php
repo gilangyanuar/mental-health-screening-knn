@@ -31,16 +31,29 @@ class SkripsiController extends Controller
 
     public function showAssessment(Request $request)
     {
+        $validatedData = $request->validate([
+            'nama_lengkap'     => 'required|string|max:255',
+            'universitas'      => 'required|string|max:255',
+            'prodi'            => 'required|string|max:255',
+            'jenis_kelamin'    => 'required|string|max:50',
+            'semester'         => 'required|string|max:50',
+            'usia'             => 'required|integer|min:17|max:40',
+            'status_ta'        => 'required|string|max:100',
+            'jam_tidur'        => 'required|string|max:100',
+            'bekerja'          => 'required|string|max:100',
+            'konfirmasi_data'  => 'accepted',
+        ]);
+
         $request->session()->put('profile', [
-            'nama_lengkap'  => $request->nama_lengkap,
-            'universitas'   => $request->universitas,
-            'prodi'         => $request->prodi,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'semester'      => $request->semester,
-            'usia'          => $request->usia,
-            'status_ta'     => $request->status_ta,
-            'jam_tidur'     => $request->jam_tidur,
-            'bekerja'       => $request->bekerja,
+            'nama_lengkap'  => $validatedData['nama_lengkap'],
+            'universitas'   => $validatedData['universitas'],
+            'prodi'         => $validatedData['prodi'],
+            'jenis_kelamin' => $validatedData['jenis_kelamin'],
+            'semester'      => $validatedData['semester'],
+            'usia'          => $validatedData['usia'],
+            'status_ta'     => $validatedData['status_ta'],
+            'jam_tidur'     => $validatedData['jam_tidur'],
+            'bekerja'       => $validatedData['bekerja'],
         ]);
 
         return view('assessment.assessment');

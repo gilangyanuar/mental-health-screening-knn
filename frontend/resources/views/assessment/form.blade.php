@@ -245,6 +245,47 @@
             color: var(--required);
         }
 
+        .confirmation-box {
+            display: flex;
+            align-items: flex-start;
+            gap: .85rem;
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 1rem 1.1rem;
+            margin-top: 1.1rem;
+            cursor: pointer;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .confirmation-box:hover,
+        .confirmation-box:focus-within {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0,201,167,.08);
+        }
+        .confirmation-box input {
+            width: 18px;
+            height: 18px;
+            margin-top: .15rem;
+            accent-color: var(--teal);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .confirmation-text {
+            font-size: .8rem;
+            line-height: 1.65;
+            color: var(--text-mid);
+        }
+        .confirmation-text strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .field-error {
+            margin-top: .45rem;
+            font-size: .72rem;
+            color: var(--required);
+            font-weight: 500;
+        }
+
         .btn-submit {
             width: 100%;
             background: var(--navy); color: var(--white); border: none;
@@ -259,6 +300,17 @@
             letter-spacing: .01em;
         }
         .btn-submit:hover { background: #0d2540; transform: translateY(-1px); }
+        .btn-submit:disabled {
+            background: #9aa7b8;
+            color: rgba(255,255,255,.72);
+            cursor: not-allowed;
+            transform: none;
+            opacity: .72;
+        }
+        .btn-submit:disabled:hover {
+            background: #9aa7b8;
+            transform: none;
+        }
 
         @media(max-width: 991px) {
             .left-panel { display: none; }
@@ -434,7 +486,17 @@
                     <span>Semua field bertanda <strong>*</strong> wajib diisi.</span>
                 </div>
 
-                <button type="submit" class="btn-submit">
+                <label class="confirmation-box" for="konfirmasiData">
+                    <input type="checkbox" id="konfirmasiData" name="konfirmasi_data" value="1" required>
+                    <span class="confirmation-text">
+                        Saya menyatakan bahwa <strong>data yang saya isi adalah benar dan dapat dipertanggungjawabkan</strong>, serta bersedia data tersebut disimpan dan digunakan untuk keperluan penelitian selanjutnya.
+                    </span>
+                </label>
+                @error('konfirmasi_data')
+                    <div class="field-error">{{ $message }}</div>
+                @enderror
+
+                <button type="submit" class="btn-submit" id="submitProfileBtn" disabled aria-disabled="true">
                     Lanjut ke Assessment DASS-21
                 </button>
 
@@ -446,6 +508,15 @@
 <script>
 const anonToggle = document.getElementById('anonToggle');
 const namaInput  = document.getElementById('namaInput');
+const konfirmasiData = document.getElementById('konfirmasiData');
+const submitProfileBtn = document.getElementById('submitProfileBtn');
+
+function syncSubmitState() {
+    const canSubmit = konfirmasiData.checked;
+    submitProfileBtn.disabled = !canSubmit;
+    submitProfileBtn.setAttribute('aria-disabled', String(!canSubmit));
+}
+
 anonToggle.addEventListener('change', function() {
     if (this.checked) {
         namaInput.value = 'Anonymous';
@@ -456,6 +527,9 @@ anonToggle.addEventListener('change', function() {
         namaInput.focus();
     }
 });
+
+konfirmasiData.addEventListener('change', syncSubmitState);
+syncSubmitState();
 </script>
 </body>
 </html>
